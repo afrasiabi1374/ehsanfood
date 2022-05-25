@@ -11,7 +11,7 @@
 </script>
 
 <template>
-    <div :class="['card-container c-pointer', modelValue === true ? 'active' : '']">
+    <div :class="['card-container c-pointer', modelValue === true ? '' : '']">
         <div class="describe-image">
             <div class="off-percent flex-center digit">{{off}}% </div>
             <img :src="'../../src/'+img" alt="product-image" draggable="false" class="pro-img">
