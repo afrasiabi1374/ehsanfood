@@ -42,7 +42,7 @@
       </template>
     </div>
     <ModalC v-model="ModalForCard">
-      <ModalFoodCardC v-model="ModalForCard" @click.stop v-if="ModalForCard"   :name="modalFood.name" :price="modalFood.price" :describe="modalFood.describe" :img="modalFood.img" :count="modalFood.count" :off="5"  />
+        <ModalFoodCardC  v-model="ModalForCard" @click.stop v-if="ModalForCard"   :name="modalFood.name" :price="modalFood.price" :describe="modalFood.describe" :img="modalFood.img" :count="modalFood.count" :off="5"  />
     </ModalC>
   </div>
 </template>

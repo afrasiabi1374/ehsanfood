@@ -1,11 +1,25 @@
 <script setup>
+import { onMounted } from 'vue';
+
     const props = defineProps({
         modelValue: Boolean,
+    })
+    onMounted(()=>{
+        document.body.addEventListener('click',()=>{
+            if (props.modelValue === true) {
+                document.body.style.overflow = 'hidden'
+            }
+        })
+        document.querySelector('.mask').addEventListener('click',()=>{
+            if (props.modelValue === false) {
+                document.body.style.overflow = 'scroll'
+            }
+        })
     })
 </script>
 <template>
     <div :class="['mask flex-center', modelValue === true ? 'mask-active' : 'mask-off']" @click="$emit('update:modelValue', modelValue=false)" >
-        <slot></slot>
+        <slot ></slot>
     </div>
 </template>
 <style lang="scss" scoped>
@@ -29,4 +43,5 @@
         transition: all .5s;
 
     }
+
 </style>

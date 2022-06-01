@@ -544,15 +544,13 @@ export const store =   createStore({
       {
         id: 1,
         name: 'mohammad ali',
-        phone: 09198017872,
+        phone: '09198017872',
         birthDate: '',
         gender: 'مرد',
         cart: [
           {
-            id:1,
-            name: 'چلوکباب لقمه 2سیخ',
-            price: 385000,
-            img: 'assets/img/foods/chelo/چلوکباب لقمه 2سیخ.jpg'
+            id:3,
+            count: 2
           }
         ],
         address: [

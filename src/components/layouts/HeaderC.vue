@@ -1,10 +1,34 @@
+<script setup>
+import { computed, onMounted, reactive, ref } from 'vue';
+import { Field, Form, ErrorMessage } from 'vee-validate';
+import { useRouter } from 'vue-router';
+import InformationsC from '../InformationsC.vue';
+import PhoneNumberC from '../PhoneNumberC.vue';
+import ModalC from '../ModalC.vue';
+const mobileModal = ref(false)
+let phoneNumber = ref('')
+const openModal = () => {
+  mobileModal.value = true
+}
+let activeComponent = ref(PhoneNumberC);
+let levelNumber = ref(0)
+const computedActiveComponent = computed(()=> {
+    
+  if (levelNumber.value === 0) {
+    activeComponent.value = PhoneNumberC
+  }else if(levelNumber.value === 1){
+    activeComponent.value = InformationsC
+  }
+  return activeComponent.value
+})
+</script>
 <template>
   <div class="container  w-full">
     <div class="nav flex-space-between  m-auto">
       <img src="../../assets/img/logo.jpg" alt="لوگو" class="logo" draggable="false">
       <div class="sign-lang flex-center">
-        <div class="sign btn ml-1 flex-center">
-          <img src="../../assets/img/icons/account.svg" class="ml-1" alt="account" >
+        <div class="sign btn ml-1 flex-center" @click="openModal">
+          <img src="../../assets/img/icons/account.svg"  class="ml-1" alt="account" >
           ورود / عضویت
         </div>
         <div class="lang btn">
@@ -23,19 +47,24 @@
         <p class="address text-white">
           آدرس: پاسداران، خیابان گل نبی، خیابان ناطق نوری (زمرد)، کوچه همایون، پلاک2
         </p>
-        <div class="online text-white">
-          <small>سفارش میپذیریم</small>
+        <div class="online text-white" >
+          <small >سفارش میپذیریم
+          </small>
         </div>
       </div>
     </div>
-    
   </div>
-  
+    <ModalC v-model="mobileModal">
+      <TransitionGroup  name="smaller" >
+        <form @submit.prevent v-if="mobileModal">
+            {{phoneNumber}}
+          <KeepAlive>
+            <component  :is="computedActiveComponent" v-model:levelNumber="levelNumber" v-model:phoneNumber="phoneNumber" />
+          </KeepAlive>
+        </form>
+      </TransitionGroup> 
+    </ModalC>
 </template>
-
-<script setup>
-
-</script>
 
 <style lang="scss" scoped>
   .container {
@@ -99,5 +128,25 @@
     margin-left: 2px;
     }
   }
-  
+  .mobile-container{ 
+    height: 200px;
+    background: rgb(255, 255, 255);
+    padding: 18px;
+    border-radius: 12px;
+
+  }
+.smaller-enter-active {
+  transform: scale(1);
+  transition: all .2s ease-out;
+
+}
+
+.smaller-leave-active {
+  transition: all .2s cubic-bezier(1, 0.5, 0.8, 1);
+}
+
+.smaller-enter-from,
+.smaller-leave-to {
+  transform: scale(.6);
+}
 </style>
