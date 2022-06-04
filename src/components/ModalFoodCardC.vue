@@ -8,6 +8,7 @@
         off: Number,
         modelValue: Boolean
     })
+
 </script>
 
 <template>

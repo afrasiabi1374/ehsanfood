@@ -543,7 +543,7 @@ export const store =   createStore({
     users: [
       {
         id: 1,
-        name: 'mohammad ali',
+        fullName: 'mohammad ali',
         phone: '09198017872',
         birthDate: '',
         gender: 'مرد',
@@ -567,10 +567,18 @@ export const store =   createStore({
   getters: {
     allFoods: (state) => {
       return state.foods
+    },
+    allUsers: (state) => {
+      return state.users
     }
   },
   mutations: {
-
+    saveUser(state, personInfo){
+      state.id ?
+      state.users.splice(state.notes.findIndex(user => user.id == personInfo.id, 1, note))
+      :
+      state.users.push({...personInfo, id: 1 + state.users.length})
+    }
   },
   actions: {
 

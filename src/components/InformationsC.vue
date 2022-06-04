@@ -1,7 +1,10 @@
 <script setup>
-import { ref } from 'vue';
+import { reactive, ref } from 'vue';
+import DatePicker from 'vue3-persian-datetime-picker'
+import { useStore } from 'vuex';
 import InputC from './InputC.vue';
-import RadioC from './RadioC.vue'; 
+import RadioC from './RadioC.vue';
+
 const emit = defineEmits(['nextLevel'])
 const props = defineProps({
     phoneNumber: Number,
@@ -10,8 +13,25 @@ const props = defineProps({
 const fullName = ref('')
 const password = ref('')
 const email = ref('')
+const gender = ref('')
 const goback = () => {
     emit('update:levelNumber', 0)
+}
+
+const store = useStore()
+
+const addUser = () => {
+    const allInformations = reactive({
+    fullName: fullName.value,
+    password: password.value,
+    email: email.value,
+    password: password.value,
+    gender: gender.value,
+    phoneNumber: props.phoneNumber,
+    birthDate: ''
+})
+    store.commit('saveUser',  ...allInformations)
+    console.log(store.getters.allUsers);
 }
 </script>
 
@@ -29,7 +49,8 @@ const goback = () => {
             <RadioC  v-model="gender" inputLabel='مرد' name="gender" val="مرد" />
             <RadioC  v-model="gender" inputLabel='زن'  name="gender" val="زن" />
         </div>
-        <div class="send-sms-btn flex-center c-pointer" @click="sendPhoneNumber">ذخیره اطلاعات</div>
+        <date-picker v-model="date"></date-picker>
+        <div class="send-sms-btn flex-center c-pointer" @click="addUser">ذخیره اطلاعات</div>
     </div>
 </template>
 <style lang="scss" scoped>

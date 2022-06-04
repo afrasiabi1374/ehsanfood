@@ -1,24 +1,38 @@
 <script setup>
-import { onMounted } from 'vue';
+import { onMounted, ref } from 'vue';
 
     const props = defineProps({
         modelValue: Boolean,
     })
+    const emit = defineEmits(['update:modelValue'])
     onMounted(()=>{
+
+
         document.body.addEventListener('click',()=>{
             if (props.modelValue === true) {
                 document.body.style.overflow = 'hidden'
             }
         })
-        document.querySelector('.mask').addEventListener('click',()=>{
+
+
+        let maskEl = ref(document.querySelectorAll('.mask'))
+
+
+        maskEl.value.forEach(el => el.addEventListener('click', () => {
             if (props.modelValue === false) {
                 document.body.style.overflow = 'scroll'
             }
-        })
+        }))
+
+
     })
+
+    const closeModal = () => {
+        emit('update:modelValue', false)
+    }
 </script>
 <template>
-    <div :class="['mask flex-center', modelValue === true ? 'mask-active' : 'mask-off']" @click="$emit('update:modelValue', modelValue=false)" >
+    <div :class="['mask flex-center', modelValue === true ? 'mask-active' : 'mask-off']" @click="closeModal" >
         <slot ></slot>
     </div>
 </template>

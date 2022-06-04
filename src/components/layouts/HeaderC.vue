@@ -57,7 +57,6 @@ const computedActiveComponent = computed(()=> {
     <ModalC v-model="mobileModal">
       <TransitionGroup  name="smaller" >
         <form @submit.prevent v-if="mobileModal">
-            {{phoneNumber}}
           <KeepAlive>
             <component  :is="computedActiveComponent" v-model:levelNumber="levelNumber" v-model:phoneNumber="phoneNumber" />
           </KeepAlive>
