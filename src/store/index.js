@@ -544,7 +544,7 @@ export const store =   createStore({
       {
         id: 1,
         fullName: 'mohammad ali',
-        phone: '09198017872',
+        phoneNumber: '09198017872',
         birthDate: '',
         gender: 'مرد',
         cart: [
@@ -575,9 +575,9 @@ export const store =   createStore({
   mutations: {
     saveUser(state, personInfo){
       state.id ?
-      state.users.splice(state.notes.findIndex(user => user.id == personInfo.id, 1, note))
+      state.users.splice(state.notes.findIndex(user => user.id == personInfo.id, 1, ...personInfo))
       :
-      state.users.push({...personInfo, id: 1 + state.users.length})
+      state.users.push({ id: 1 + state.users.length, ...personInfo })
     }
   },
   actions: {

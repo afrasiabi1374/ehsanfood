@@ -4,7 +4,6 @@ import DatePicker from 'vue3-persian-datetime-picker'
 import { useStore } from 'vuex';
 import InputC from './InputC.vue';
 import RadioC from './RadioC.vue';
-
 const emit = defineEmits(['nextLevel'])
 const props = defineProps({
     phoneNumber: Number,
@@ -14,6 +13,7 @@ const fullName = ref('')
 const password = ref('')
 const email = ref('')
 const gender = ref('')
+const date = ref('')
 const goback = () => {
     emit('update:levelNumber', 0)
 }
@@ -28,10 +28,18 @@ const addUser = () => {
     password: password.value,
     gender: gender.value,
     phoneNumber: props.phoneNumber,
-    birthDate: ''
+    birthDate: date.value
 })
-    store.commit('saveUser',  ...allInformations)
-    console.log(store.getters.allUsers);
+const allUsers = ref(store.getters.allUsers)
+if (allUsers.value.find(user => user.phoneNumber === props.phoneNumber)) {
+    alert('شماره تلفن وارد شده تکراری است .')
+}else {
+    store.commit('saveUser',  {...allInformations})
+    document.cookie = `userCookieFood = ${props.phoneNumber}`
+    console.log('غیر تکراری', allUsers.value); 
+}
+    
+    console.log();
 }
 </script>
 
@@ -49,7 +57,10 @@ const addUser = () => {
             <RadioC  v-model="gender" inputLabel='مرد' name="gender" val="مرد" />
             <RadioC  v-model="gender" inputLabel='زن'  name="gender" val="زن" />
         </div>
-        <date-picker v-model="date"></date-picker>
+        <div class="birth-date">
+            <h5> تاریخ تولد </h5>
+            <date-picker width="50px" v-model="date"></date-picker>
+        </div>
         <div class="send-sms-btn flex-center c-pointer" @click="addUser">ذخیره اطلاعات</div>
     </div>
 </template>
@@ -100,5 +111,11 @@ const addUser = () => {
         text-align: left;
         cursor: pointer;
         align-items: flex-end;
+    }
+    .birth-date {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
     }
 </style>
