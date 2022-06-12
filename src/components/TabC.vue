@@ -18,6 +18,8 @@
 <style lang="scss" scoped>
     .container {
         position: relative;
+        margin-top: 25px;
+        width: 100%;
     }
     .navigation {
         list-style-type: none;

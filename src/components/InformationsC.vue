@@ -1,10 +1,13 @@
 <script setup>
 import { reactive, ref } from 'vue';
+import { useRouter } from 'vue-router';
+import { useCookies } from "vue3-cookies";
+
 import DatePicker from 'vue3-persian-datetime-picker'
 import { useStore } from 'vuex';
 import InputC from './InputC.vue';
 import RadioC from './RadioC.vue';
-const emit = defineEmits(['nextLevel'])
+const emit = defineEmits(['nextLevel','closeModal'])
 const props = defineProps({
     phoneNumber: Number,
     levelNumber: Number
@@ -14,6 +17,8 @@ const password = ref('')
 const email = ref('')
 const gender = ref('')
 const date = ref('')
+const { cookies } = useCookies();
+const router = useRouter()
 const goback = () => {
     emit('update:levelNumber', 0)
 }
@@ -21,6 +26,7 @@ const goback = () => {
 const store = useStore()
 
 const addUser = () => {
+    document.body.style.overflow = 'scroll'
     const allInformations = reactive({
     fullName: fullName.value,
     password: password.value,
@@ -35,8 +41,11 @@ if (allUsers.value.find(user => user.phoneNumber === props.phoneNumber)) {
     alert('شماره تلفن وارد شده تکراری است .')
 }else {
     store.commit('saveUser',  {...allInformations})
-    document.cookie = `userCookieFood = ${props.phoneNumber}`
+    cookies.set('userCookie',props.phoneNumber, '10d')
+    emit('closeModal', false)
+    console.log('کوکی ها',cookies.get('userCookie'));
     console.log('غیر تکراری', allUsers.value); 
+    router.push('/profile/informations')
 }
     
     console.log();
@@ -45,21 +54,21 @@ if (allUsers.value.find(user => user.phoneNumber === props.phoneNumber)) {
 
 <template>
     <div class="information-container flex-column-center" @click.stop>
-        <small class="go-back" @click="goback">برگشت</small>
+        <small class="go-back pointer" @click="goback">برگشت</small>
         <h5 class="send-sms-title">
             اطلاعات تکمیلی (ضروری)
         </h5>
-        <InputC   v-model="fullName"  class="send-sms-input" inputLabel='نام و نام خانوادکی' inputWidth="300" inputType="text" />
-        <InputC   v-model="password"  class="send-sms-input" inputLabel='رمز عبور' inputWidth="300" inputType="text" />
-        <InputC   v-model="email"  class="send-sms-input" inputLabel='ایمیل' inputWidth="300" inputType="text" />
+        <InputC   v-model="fullName"  class="info-input" inputLabel='نام و نام خانوادکی' inputWidth="300" inputType="text" />
+        <InputC   v-model="password"  class="info-input" inputLabel='رمز عبور' inputWidth="300" inputType="password" />
+        <InputC   v-model="email"  class="info-input" inputLabel='ایمیل' inputWidth="300" inputType="text" />
         <div class="gender">
             <h5>جنسیت:</h5>
             <RadioC  v-model="gender" inputLabel='مرد' name="gender" val="مرد" />
             <RadioC  v-model="gender" inputLabel='زن'  name="gender" val="زن" />
         </div>
         <div class="birth-date">
-            <h5> تاریخ تولد </h5>
-            <date-picker width="50px" v-model="date"></date-picker>
+            <h5>  تاریخ تولد :  </h5>
+            <date-picker  width="50px" v-model="date"></date-picker>
         </div>
         <div class="send-sms-btn flex-center c-pointer" @click="addUser">ذخیره اطلاعات</div>
     </div>
@@ -74,8 +83,9 @@ if (allUsers.value.find(user => user.phoneNumber === props.phoneNumber)) {
       margin-top: 5px;
       text-align: center;
     }
-    .send-sms-input {
+    .info-input {
       margin-top: 20px;
+      width: 90%;
     }
     .send-sms-btn {
       width: 110px;

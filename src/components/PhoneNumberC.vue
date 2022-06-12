@@ -1,5 +1,9 @@
 <script setup>
+import { onMounted, reactive } from 'vue';
+import { useStore } from 'vuex';
 import InputC from './InputC.vue';
+const store = useStore()
+const allUsers = store.getters.allUsers
 const emit = defineEmits([
   'update:phoneNumber',
   'update:levelNumber'
@@ -8,12 +12,25 @@ const props = defineProps({
   levelNumber: Number,
   phoneNumber: String
 })
-const sendPhoneNumber = () => {
-  emit('update:levelNumber', 1)
-}
 const changeNumber = (n) => {
-    emit('update:phoneNumber', n)
+  emit('update:phoneNumber', n)
 }
+
+const sendPhoneNumber = () => {
+  let userPass = allUsers.find(element => element.phoneNumber === props.phoneNumber)?.password
+  if (userPass) {
+    emit('update:levelNumber', 2)
+  }else if(!userPass) {
+    emit('update:levelNumber', 1)
+  }
+}
+
+  onMounted(()=>{
+    document.body.addEventListener('click', ()=> {
+      emit('update:levelNumber', 0)
+      
+    })
+  })
 
 </script>
 <template>

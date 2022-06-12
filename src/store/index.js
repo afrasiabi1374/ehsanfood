@@ -1,4 +1,6 @@
 import { createStore } from 'vuex'
+import { useCookies } from "vue3-cookies";
+
 export const store =   createStore({
   state: {
     foods: [
@@ -570,6 +572,11 @@ export const store =   createStore({
     },
     allUsers: (state) => {
       return state.users
+    },
+    targetUser: (state) => {
+      const {cookies} = useCookies()
+      const userInfoCookie = cookies.get('userCookie')
+      return state.users.find(user => user.phoneNumber = userInfoCookie)
     }
   },
   mutations: {
@@ -578,6 +585,7 @@ export const store =   createStore({
       state.users.splice(state.notes.findIndex(user => user.id == personInfo.id, 1, ...personInfo))
       :
       state.users.push({ id: 1 + state.users.length, ...personInfo })
+
     }
   },
   actions: {

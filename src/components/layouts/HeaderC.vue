@@ -1,16 +1,17 @@
 <script setup>
-import { computed, onMounted, reactive, ref } from 'vue';
+import { computed, onMounted, reactive, ref, shallowRef } from 'vue';
 import { Field, Form, ErrorMessage } from 'vee-validate';
 import { useRouter } from 'vue-router';
 import InformationsC from '../InformationsC.vue';
 import PhoneNumberC from '../PhoneNumberC.vue';
+import SignIn from '../SignIn.vue';
 import ModalC from '../ModalC.vue';
 const mobileModal = ref(false)
-let phoneNumber = ref('')
+let phoneNumber =  shallowRef('')
 const openModal = () => {
   mobileModal.value = true
 }
-let activeComponent = ref(PhoneNumberC);
+let activeComponent = shallowRef(PhoneNumberC);
 let levelNumber = ref(0)
 const computedActiveComponent = computed(()=> {
     
@@ -18,9 +19,19 @@ const computedActiveComponent = computed(()=> {
     activeComponent.value = PhoneNumberC
   }else if(levelNumber.value === 1){
     activeComponent.value = InformationsC
+  }else if(levelNumber.value === 2){
+    activeComponent.value = SignIn
+  }else if(mobileModal.value === false){
+    activeComponent.value = PhoneNumberC
   }
   return activeComponent.value
 })
+const closeModal = async (param) => {
+  phoneNumber.value = ''
+  mobileModal.value = param;
+  levelNumber.value = 0
+  activeComponent.value = 0
+  }
 </script>
 <template>
   <div class="container  w-full">
@@ -57,9 +68,9 @@ const computedActiveComponent = computed(()=> {
     <ModalC v-model="mobileModal">
       <TransitionGroup  name="smaller" >
         <form @submit.prevent v-if="mobileModal">
-          <KeepAlive>
-            <component  :is="computedActiveComponent" v-model:levelNumber="levelNumber" v-model:phoneNumber="phoneNumber" />
-          </KeepAlive>
+          <keep-alive>
+            <component  @closeModal="closeModal"  :is="computedActiveComponent" v-model:levelNumber="levelNumber" v-model:phoneNumber="phoneNumber" />
+          </keep-alive>
         </form>
       </TransitionGroup> 
     </ModalC>

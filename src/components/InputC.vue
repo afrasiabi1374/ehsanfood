@@ -2,7 +2,6 @@
     import { ref, onMounted, computed } from 'vue'
     const props = defineProps({
         inputLabel: String,
-        inputWidth: String,
         inputType: String,
         modelValue: String
     })
@@ -23,8 +22,7 @@
     const clickOut = () =>  {
         active.value = false
     }
-    let  widthVar = props.inputWidth > 0 ? ref(props.inputWidth + 'px') : ref( 300 + 'px' )
-    const logger = (e) => {
+    const sendValue = (e) => {
         emit('update:modelValue', e.target.value)
     }
     const computedModelValue = computed(()=> {
@@ -37,10 +35,10 @@
 
 </script>
 <template>
-    <div class="input-box" @click.prevent="clickIn">
+    <div v-bind="$attrs" class="input-box" @click.prevent="clickIn">
         <img src="../assets/img/icons/magnify.png" alt="magnify" class="search-icon">
         <label @click.stop="clickIn"  :class="['place-holder','c-pointer', props.modelValue || active ? 'active' : '']" for="search" :id="[randID]"> {{ inputLabel }} </label>
-        <input  :type="props.inputType" @input="logger($event)" @click.stop="clickIn"  @blur.stop="clickOut"  class="search-input digit" type="text" :id="['input-'+randID]">
+        <input  :value="modelValue"  :type="props.inputType" @input="sendValue($event)" @click.stop="clickIn"  @blur.stop="clickOut"  class="search-input digit" type="text" :id="['input-'+randID]">
     </div>
 </template>
 <style lang="scss" scoped>
@@ -51,7 +49,6 @@
         border: 1px solid black;
         padding: 4px;
         border-radius: 10px;
-        width: v-bind(widthVar);
         .place-holder{
             font-size: 12px;
             position: absolute;
