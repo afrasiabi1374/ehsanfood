@@ -1,14 +1,22 @@
 <script setup>
     import { ref } from 'vue';
+import { useStore } from 'vuex';
     import InputC from '../InputC.vue'
-
+    const store = useStore()
     const password = ref('')
+    const repeatPassword = ref('')
+    const changePass =  (first, second) => {
+        if (first == second) {
+            store.commit('changePass', first)
+            console.log(store.getters.targetUser);
+        }
+    }
 </script>
 <template>
     <form class="pass-container">
         <InputC   v-model="password"  class="input" inputLabel='رمز جدید' inputWidth="400px" inputType="text" />
-        <InputC   v-model="password"  class="input" inputLabel='تایید رمز جدید' inputWidth="400px" inputType="text" />
-        <button class="send-sms-btn flex-center c-pointer">ذخیره اطلاعات</button>
+        <InputC   v-model="repeatPassword"  class="input" inputLabel='تایید رمز جدید' inputWidth="400px" inputType="text" />
+        <button class="send-sms-btn flex-center c-pointer" @click.prevent="changePass(password,repeatPassword)">ذخیره اطلاعات</button>
     </form>
 </template>
 <style lang="scss" >

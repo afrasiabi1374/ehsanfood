@@ -547,8 +547,9 @@ export const store =   createStore({
         id: 1,
         fullName: 'mohammad ali',
         phoneNumber: '09198017872',
-        birthDate: '',
+        birthDate: '1374/11/17',
         gender: 'مرد',
+        email:'mohammad.aligiga@gmailcom',
         cart: [
           {
             id:3,
@@ -564,7 +565,8 @@ export const store =   createStore({
         ],
         password: 12345678
       }
-    ]
+    ],
+    activeUser: {}
   },
   getters: {
     allFoods: (state) => {
@@ -573,10 +575,8 @@ export const store =   createStore({
     allUsers: (state) => {
       return state.users
     },
-    targetUser: (state) => {
-      const {cookies} = useCookies()
-      const userInfoCookie = cookies.get('userCookie')
-      return state.users.find(user => user.phoneNumber = userInfoCookie)
+    targetUser: (state) =>{
+      return state.activeUser
     }
   },
   mutations: {
@@ -586,6 +586,14 @@ export const store =   createStore({
       :
       state.users.push({ id: 1 + state.users.length, ...personInfo })
 
+    },
+    setActiveUser(state, phoneNumber){
+      state.activeUser = state.users.find(user => user.phoneNumber == phoneNumber)
+      console.log(state.activeUser);
+    },
+    changePass(state,password){
+      state.users.find(user => user.password == state.activeUser.password).password = password
+      
     }
   },
   actions: {

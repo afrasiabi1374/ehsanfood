@@ -36,7 +36,9 @@ const closeModal = async (param) => {
 <template>
   <div class="container  w-full">
     <div class="nav flex-space-between  m-auto">
-      <img src="../../assets/img/logo.jpg" alt="لوگو" class="logo" draggable="false">
+      <router-link to="/">
+        <img src="../../assets/img/logo.jpg" alt="لوگو" class="logo" draggable="false"/>
+      </router-link>
       <div class="sign-lang flex-center">
         <div class="sign btn ml-1 flex-center" @click="openModal">
           <img src="../../assets/img/icons/account.svg"  class="ml-1" alt="account" >

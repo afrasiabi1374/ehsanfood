@@ -8,7 +8,7 @@
 </script>
 <template>
     <label class="radio-container">
-        <input @input="$emit('update:modelValue', $event.target.value)" type="radio" :name="name" :value="val"/>
+        <input @input="$emit('update:modelValue', $event.target.value)" type="radio" v-bind="$attrs" :name="name" :value="val"/>
         <span>{{inputLabel}}</span>
     </label>
 </template>

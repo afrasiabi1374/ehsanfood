@@ -19,10 +19,11 @@
         let targetUser = await allUsers.find(user => (user.password == password.value && user.phoneNumber == props.phoneNumber))
         if (targetUser) {
             cookies.set('userCookie',props.phoneNumber, '10d')
-            store.getters.targetUser(props.phoneNumber)
+            store.commit('setActiveUser', props.phoneNumber)
+            store.getters.targetUser
+             emit('closeModal', false)
+             emit('update:levelNumber', 0)
             router.push('/profile/informations')
-            emit('closeModal', false)
-            emit('update:levelNumber', 0)
         }
 
     }

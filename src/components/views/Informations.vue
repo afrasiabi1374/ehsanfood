@@ -1,13 +1,13 @@
 <script setup>
     import InputC from '../InputC.vue'
     import RadioC from '../RadioC.vue'
-    import { ref } from 'vue';
+    import { onBeforeMount, reactive, ref, toRef } from 'vue';
     import DatePicker from 'vue3-persian-datetime-picker'
     import { useStore } from 'vuex';
-
     const store = useStore()
-    const userInfo = store.getters.targetUser
-
+    const userInfo = reactive(store.getters.targetUser)
+    onBeforeMount(()=>{
+    })
     const fullName = ref(userInfo.fullName)
     const mobile = ref(userInfo.phoneNumber)
     const email = ref(userInfo.email)
@@ -20,11 +20,11 @@
         <InputC    v-model="fullName"  class="info-input" inputLabel='نام و نام خانوادکی' inputWidth="220" inputType="text" />
         <InputC   v-model="mobile"  class="info-input" inputLabel='شماره موبایل' inputWidth="220" inputType="text" />
         <InputC   v-model="email"  class="info-input" inputLabel='ایمیل' inputWidth="220" inputType="text" />
-            <date-picker class="info-input" v-model="date"></date-picker>{{date}}
+            <date-picker class="info-input" v-model="date"></date-picker>
         <div class="gender">
             <h5>جنسیت:</h5>
-            <RadioC  v-model="gender" inputLabel='مرد' name="gender" val="مرد" />
-            <RadioC  v-model="gender" inputLabel='زن'  name="gender" val="زن" />
+            <RadioC  :checked = "gender === 'مرد'? true : false"  v-model="gender" inputLabel='مرد' name="gender" val="مرد" />
+            <RadioC  :checked = "gender === 'زن'? true : false" v-model="gender" inputLabel='زن'  name="gender" val="زن" />
         </div>
         <div class="date-gender">
 

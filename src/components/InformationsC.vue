@@ -42,6 +42,7 @@ if (allUsers.value.find(user => user.phoneNumber === props.phoneNumber)) {
 }else {
     store.commit('saveUser',  {...allInformations})
     cookies.set('userCookie',props.phoneNumber, '10d')
+    store.commit('setActiveUser', props.phoneNumber)
     emit('closeModal', false)
     console.log('کوکی ها',cookies.get('userCookie'));
     console.log('غیر تکراری', allUsers.value); 
