@@ -577,11 +577,14 @@ export const store =   createStore({
     },
     targetUser: (state) =>{
       return state.activeUser
+    },
+    addressForShow: (state) => {
+      return state.activeUser.address
     }
   },
   mutations: {
     saveUser(state, personInfo){
-      state.id ?
+      personInfo.id ?
       state.users.splice(state.notes.findIndex(user => user.id == personInfo.id, 1, ...personInfo))
       :
       state.users.push({ id: 1 + state.users.length, ...personInfo })
@@ -594,6 +597,22 @@ export const store =   createStore({
     changePass(state,password){
       state.users.find(user => user.password == state.activeUser.password).password = password
       
+    },
+    saveAddress(state, address) {
+      const targetUser = state.users.find( user => user.id == state.activeUser.id)
+      address.id
+      ?
+
+      targetUser.address.splice(targetUser.address.findIndex(add => add.id == address.id), 1, ...add)
+
+      :
+      targetUser.address.push({id: 1 + targetUser.address.length + 1, ...address})
+      console.log(targetUser.address);
+    },
+    deleteAddress(state,id){
+      const targetUser = state.users.find( user => user.id == state.activeUser.id)
+      targetUser.address.splice(targetUser.address.findIndex(add => add.id == id), 1)
+
     }
   },
   actions: {

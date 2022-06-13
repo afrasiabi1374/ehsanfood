@@ -27,6 +27,7 @@ const computedActiveComponent = computed(()=> {
   return activeComponent.value
 })
 const closeModal = async (param) => {
+   document.body.style.overflow = 'scroll'
   phoneNumber.value = ''
   mobileModal.value = param;
   levelNumber.value = 0
