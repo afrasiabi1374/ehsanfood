@@ -580,7 +580,8 @@ export const store =   createStore({
     },
     addressForShow: (state) => {
       return state.activeUser.address
-    }
+    },
+
   },
   mutations: {
     saveUser(state, personInfo){
