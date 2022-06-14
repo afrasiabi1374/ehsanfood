@@ -44,13 +44,13 @@ const closeModal = async (param) => {
         <img src="../../assets/img/logo.jpg" alt="لوگو" class="logo" draggable="false"/>
       </router-link>
       <div class="sign-lang flex-center">
-        <div v-if="activeUser !== {}" class="sign btn ml-1 flex-center" @click="openModal">
+        <div v-if="activeUser === {}" class="sign btn ml-1 flex-center" @click="openModal">
           <img src="../../assets/img/icons/account.svg"  class="ml-1" alt="account" >
           ورود / عضویت
         </div>
-        <div v-if="activeUser === {}" class="sign btn ml-1 flex-center" @click="openModal">
+        <div v-if="activeUser !== {}" class="sign btn ml-1 flex-center" @click="goOut">
           <img src="../../assets/img/icons/account.svg"  class="ml-1" alt="account" >
-          khorooj
+          خروج
         </div>
         <div class="lang btn">
           En
