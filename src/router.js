@@ -20,15 +20,18 @@ const router = createRouter({
     history:createWebHistory(),
     routes
 })
-router.beforeEach(async (to, from, next) => {
-    const pattern = /(profile)/
-    let patternTest =  pattern.test(to.name)
+router.beforeEach( (to, from, next) => {
+    const pattern = /(\/profile\/)/
+    let patternTest =  pattern.test(to.path)
+    console.log(patternTest);
     if (patternTest) {
         console.log(patternTest);
 
         console.log(cookies.get('userCookie'));
-        if(cookies.get('userCookie') == null){
-            next({path: 'home'})
+        if(cookies.get('userCookie')){
+            next({name: to.name})
+        }else {
+            next({name: 'home'})
         }
     }else {
         next()
