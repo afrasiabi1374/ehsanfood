@@ -6,6 +6,7 @@ import InformationsC from '../InformationsC.vue';
 import PhoneNumberC from '../PhoneNumberC.vue';
 import SignIn from '../SignIn.vue';
 import ModalC from '../ModalC.vue';
+import { useStore } from 'vuex';
 const mobileModal = ref(false)
 let phoneNumber =  shallowRef('')
 const openModal = () => {
@@ -33,6 +34,8 @@ const closeModal = async (param) => {
   levelNumber.value = 0
   activeComponent.value = 0
   }
+  const store = useStore()
+  const activeUser = store.getters.activeUser
 </script>
 <template>
   <div class="container  w-full">
@@ -41,9 +44,13 @@ const closeModal = async (param) => {
         <img src="../../assets/img/logo.jpg" alt="لوگو" class="logo" draggable="false"/>
       </router-link>
       <div class="sign-lang flex-center">
-        <div class="sign btn ml-1 flex-center" @click="openModal">
+        <div v-if="activeUser !== {}" class="sign btn ml-1 flex-center" @click="openModal">
           <img src="../../assets/img/icons/account.svg"  class="ml-1" alt="account" >
           ورود / عضویت
+        </div>
+        <div v-if="activeUser === {}" class="sign btn ml-1 flex-center" @click="openModal">
+          <img src="../../assets/img/icons/account.svg"  class="ml-1" alt="account" >
+          khorooj
         </div>
         <div class="lang btn">
           En

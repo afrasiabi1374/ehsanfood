@@ -29,7 +29,7 @@ router.beforeEach( (to, from, next) => {
 
         console.log(cookies.get('userCookie'));
         if(cookies.get('userCookie')){
-            next({name: to.name})
+            next()
         }else {
             next({name: 'home'})
         }
