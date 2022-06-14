@@ -4,6 +4,8 @@ import Profile from './components/views/Profile.vue'
 import Informations from './components/views/Informations.vue'
 import Password from './components/views/Password.vue'
 import Address from './components/views/Address.vue'
+import { useCookies } from "vue3-cookies";
+const {cookies} = useCookies()
 
 const routes = [
     { path: '/', name: 'home', component: Home },
@@ -18,5 +20,18 @@ const router = createRouter({
     history:createWebHistory(),
     routes
 })
+router.beforeEach(async (to, from, next) => {
+    const pattern = /(profile)/
+    let patternTest =  pattern.test(to.name)
+    if (patternTest) {
+        console.log(patternTest);
 
+        console.log(cookies.get('userCookie'));
+        if(cookies.get('userCookie') == null){
+            next({path: 'home'})
+        }
+    }else {
+        next()
+    }
+})
 export default router
