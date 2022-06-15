@@ -22,7 +22,7 @@
   onMounted(()=>{
     window.onscroll = () => {
       stickyCat()
-      console.log('stycky is',sticky.value, 'windo :', window.pageYOffset);
+      console.log('stycky is', sticky.value, 'windo :', window.pageYOffset);
     }
     const categoryBox = document.getElementById('categy-Box')
     const sticky = ref(categoryBox.getBoundingClientRect().top)
@@ -34,13 +34,22 @@
       }
     }
 
+    const proContainer  = ref(document.querySelector('product-container').getBoundingClientRect.bottom)
+    const classSpy = ref(false)
+    const spy = () => {
+      if ((window.pageYOffset > sticky.value) && (window.pageYOffset < proContainer)) {
+        document.getElementsByClassName('category').classList.add("classSpy")
+      }else {
+        document.getElementsByClassName('category').classList.remove("classSpy")
+      }
+    }
 
   })
 
 </script>
 <template>
   <div  class="container w-full ">
-    <div id="categy-Box" class="categories ">
+    <div id="categy-Box" class="categories">
       <template v-for="(category, i) in foods" :key="i">
         <a :href="'#'+category.categoryId" class="category flex-column-center c-pointer">
           <img :src="'../../src/' + category.categoryImage" alt="category-image" class="img-cat" draggable="false" >
@@ -124,5 +133,9 @@
 }
 .category {
   text-decoration: none;
+}
+
+.classSpy {
+  border-bottom: 2pc solid black;
 }
 </style>
