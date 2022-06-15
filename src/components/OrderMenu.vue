@@ -25,7 +25,7 @@
       console.log('stycky is',sticky.value, 'windo :', window.pageYOffset);
     }
     const categoryBox = document.getElementById('categy-Box')
-    const sticky = ref(categoryBox.getBoundingClientRect().y)
+    const sticky = ref(categoryBox.getBoundingClientRect().top)
     const stickyCat = () => {
       if (window.pageYOffset > sticky.value) {
         categoryBox.classList.add("sticky")
@@ -42,10 +42,10 @@
   <div  class="container w-full ">
     <div id="categy-Box" class="categories ">
       <template v-for="(category, i) in foods" :key="i">
-        <div  class="category flex-column-center c-pointer">
+        <a :href="'#'+category.categoryId" class="category flex-column-center c-pointer">
           <img :src="'../../src/' + category.categoryImage" alt="category-image" class="img-cat" draggable="false" >
-          <a class="cat-caption" :href="'#'+category.categoryId">{{category.category}}</a>
-        </div>
+          <h3 class="cat-caption" >{{category.category}}</h3>
+        </a>
       </template>
 
     </div>
@@ -122,5 +122,7 @@
   z-index: 5;
   width: 100%;
 }
-
+.category {
+  text-decoration: none;
+}
 </style>
