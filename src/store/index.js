@@ -6,6 +6,7 @@ export const store =   createStore({
     foods: [
       {
         category: 'چلوها',
+        categoryId: 'chelo',
         categoryImage: 'assets/img/cat-icons/چلوها.png',
         child: [
           {
@@ -214,6 +215,7 @@ export const store =   createStore({
 
       {
         category: 'خوراک ها',
+        categoryId: 'khorak',
         categoryImage: ('assets/img/cat-icons/خوراک.png'),
         child: [
 
@@ -358,6 +360,7 @@ export const store =   createStore({
       },
       {
         category: 'خورشت ها',
+        categoryId: 'khoresht',
         categoryImage: ('assets/img/cat-icons/خورشت ها.png'),
         child: [
           {
@@ -404,6 +407,7 @@ export const store =   createStore({
       },
       {
         category: 'دسرها و سالادها',
+        categoryId: 'salad',
         categoryImage: ('assets/img/cat-icons/دسرها و سالادها.png'),
         child: [
           {
@@ -482,6 +486,7 @@ export const store =   createStore({
       },
       {
         category: 'نوشیدنی',
+        categoryId: 'drink',
         categoryImage: ('assets/img/cat-icons/نوشیدنی.png'),
         child: [
           {

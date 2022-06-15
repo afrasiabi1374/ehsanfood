@@ -21,7 +21,7 @@ const router = createRouter({
     routes
 })
 router.beforeEach( (to, from, next) => {
-    const pattern = /(\/profile\/)/
+    const pattern = /(\/profile)/
     let patternTest =  pattern.test(to.path)
     console.log(patternTest);
     if (patternTest) {

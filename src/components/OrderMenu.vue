@@ -25,10 +25,10 @@
 <template>
   <div class="container w-full ">
     <div class="categories ">
-      <template v-for="category in foods">
+      <template v-for="(category, i) in foods" :key="i">
         <div class="category flex-column-center c-pointer">
           <img :src="'../../src/' + category.categoryImage" alt="category-image" class="img-cat" draggable="false" >
-          <h4 class="cat-caption">{{category.category}}</h4>
+          <a class="cat-caption" :href="'#'+category.categoryId">{{category.category}}</a>
         </div>
       </template>
 
@@ -38,7 +38,7 @@
     </div>
     <div>
       <template v-for="(category, i) in foods" :key="i">
-        <h3>{{category.category}}</h3>
+        <h3 :id="category.categoryId">{{category.category}}</h3>
         <div class="product-container">
           <template v-for="(food, index) in category.child" :key="index">
             <CardC @click="addFooModal(food)"  :name="food.name" :price="food.price" :describe="food.describe" :img="food.img" :count="food.count" :off="5"  />
@@ -66,7 +66,10 @@
   .cat-caption {
     font-size: 10px;
     color: #333333;
-    white-space: nowrap
+    white-space: nowrap;
+    font-size: 13px;
+    text-decoration: none;
+    font-weight: bolder;
   }
   .categories {
     display: flex;
