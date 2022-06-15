@@ -1,7 +1,7 @@
 <script setup>
   import { computed } from '@vue/reactivity';
   import { useStore } from 'vuex';
-  import { ref } from 'vue';
+  import { onMounted, ref } from 'vue';
   import InputC from './InputC.vue';
   import CardC from './CardC.vue';
   import ModalC from './ModalC.vue';
@@ -16,17 +16,33 @@
     modalFood.value = food
     ModalForCard.value = true
   }
-
   const valueForSearch = ref('')
-  
 
+
+  onMounted(()=>{
+    window.onscroll = () => {
+      stickyCat()
+      console.log('stycky is',sticky.value, 'windo :', window.pageYOffset);
+    }
+    const categoryBox = document.getElementById('categy-Box')
+    const sticky = ref(categoryBox.getBoundingClientRect().y)
+    const stickyCat = () => {
+      if (window.pageYOffset > sticky.value) {
+        categoryBox.classList.add("sticky")
+      }else{
+        categoryBox.classList.remove("sticky")
+      }
+    }
+
+
+  })
 
 </script>
 <template>
-  <div class="container w-full ">
-    <div class="categories ">
+  <div  class="container w-full ">
+    <div id="categy-Box" class="categories ">
       <template v-for="(category, i) in foods" :key="i">
-        <div class="category flex-column-center c-pointer">
+        <div  class="category flex-column-center c-pointer">
           <img :src="'../../src/' + category.categoryImage" alt="category-image" class="img-cat" draggable="false" >
           <a class="cat-caption" :href="'#'+category.categoryId">{{category.category}}</a>
         </div>
@@ -57,8 +73,7 @@
   .container {
     margin-top: 20px;
   }
-  .category {
-  }
+
   .img-cat {
     widows: 40px;
     height: 40px;
@@ -90,5 +105,22 @@
     flex-wrap: wrap;
     gap: 1.1%;
   }
+
+  .header {
+  padding: 10px 16px;
+  background: #555;
+  color: #f1f1f1;
+}
+
+/* Page content */
+
+/* The sticky class is added to the header with JS when it reaches its scroll position */
+.sticky {
+  position: fixed!important;
+  top: 0!important;
+  background-color: white;
+  z-index: 5;
+  width: 100%;
+}
 
 </style>
