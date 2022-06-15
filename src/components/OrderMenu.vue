@@ -2,7 +2,7 @@
   import { computed } from '@vue/reactivity';
   import { useStore } from 'vuex';
   import { ref } from 'vue';
-  import SearchInput from './SearchInput.vue';
+  import InputC from './InputC.vue';
   import CardC from './CardC.vue';
   import ModalC from './ModalC.vue';
   import ModalFoodCardC from './ModalFoodCardC.vue';
@@ -16,6 +16,11 @@
     modalFood.value = food
     ModalForCard.value = true
   }
+
+  const valueForSearch = ref('')
+  
+
+
 </script>
 <template>
   <div class="container w-full ">
@@ -28,8 +33,8 @@
       </template>
 
     </div>
-    <div class="w-full search-container">
-      <SearchInput />
+    <div class=" search-container">
+      <InputC v-model="valueForSearch" inputLabel="جستجو" />
     </div>
     <div>
       <template v-for="(category, i) in foods" :key="i">
@@ -73,6 +78,7 @@
   .search-container {
     padding: 10px 15px;
     border-bottom: 1px dashed rgb(228, 228, 228);
+    width: 300px;
   }
   .product-container {
     width: 99%;

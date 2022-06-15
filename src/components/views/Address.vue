@@ -1,8 +1,8 @@
 <script setup>
-import { reactive, ref } from 'vue';
+    import { reactive, ref } from 'vue';
     import { useStore } from 'vuex';
     import InputC from '../InputC.vue'
-import ModalC from '../ModalC.vue';
+    import ModalC from '../ModalC.vue';
 
     const addr = reactive({
         name: '',
@@ -16,6 +16,9 @@ import ModalC from '../ModalC.vue';
     const activeModal = ref(false)
     const deleteAddress = (id) => {
         store.commit('deleteAddress', id)
+    }
+    const addressEdit = (addr) => {
+        store.commit('addressEdit', id)
     }
 
 </script>

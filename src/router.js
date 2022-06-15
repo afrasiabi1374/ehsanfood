@@ -26,7 +26,6 @@ router.beforeEach( (to, from, next) => {
     console.log(patternTest);
     if (patternTest) {
         console.log(patternTest);
-
         console.log(cookies.get('userCookie'));
         if(cookies.get('userCookie')){
             next()

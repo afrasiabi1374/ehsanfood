@@ -9,6 +9,7 @@ import ModalC from '../ModalC.vue';
 import { useStore } from 'vuex';
 const mobileModal = ref(false)
 let phoneNumber =  shallowRef('')
+const router = useRouter()
 const openModal = () => {
   mobileModal.value = true
 }
@@ -35,7 +36,11 @@ const closeModal = async (param) => {
   activeComponent.value = 0
   }
   const store = useStore()
-  const activeUser = store.getters.activeUser
+  const activeUser = computed(()=>store.getters.targetUser)
+  const goOut = () => {
+    store.commit('goOut')
+    router.push('/')
+  }
 </script>
 <template>
   <div class="container  w-full">
@@ -44,11 +49,11 @@ const closeModal = async (param) => {
         <img src="../../assets/img/logo.jpg" alt="لوگو" class="logo" draggable="false"/>
       </router-link>
       <div class="sign-lang flex-center">
-        <div v-if="activeUser === {}" class="sign btn ml-1 flex-center" @click="openModal">
+        <div v-if="Object.keys(activeUser).length <= 0" class="sign btn ml-1 flex-center" @click="openModal">
           <img src="../../assets/img/icons/account.svg"  class="ml-1" alt="account" >
           ورود / عضویت
         </div>
-        <div v-if="activeUser !== {}" class="sign btn ml-1 flex-center" @click="goOut">
+        <div v-else class="sign btn ml-1 flex-center" @click="goOut">
           <img src="../../assets/img/icons/account.svg"  class="ml-1" alt="account" >
           خروج
         </div>

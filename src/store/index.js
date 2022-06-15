@@ -585,11 +585,9 @@ export const store =   createStore({
   },
   mutations: {
     saveUser(state, personInfo){
-      personInfo.id ?
-      state.users.splice(state.notes.findIndex(user => user.id == personInfo.id, 1, ...personInfo))
-      :
-      state.users.push({ id: 1 + state.users.length, ...personInfo })
 
+      state.users.push({ id: 1 + state.users.length, ...personInfo })
+      
     },
     setActiveUser(state, phoneNumber){
       state.activeUser = state.users.find(user => user.phoneNumber == phoneNumber)
@@ -613,6 +611,24 @@ export const store =   createStore({
     deleteAddress(state,id){
       const targetUser = state.users.find( user => user.id == state.activeUser.id)
       targetUser.address.splice(targetUser.address.findIndex(add => add.id == id), 1)
+
+    },
+    goOut(state){
+      const {cookies} = useCookies()
+      console.log(cookies.remove('userCookie'));
+      state.activeUser = {}
+      
+    },
+    saveInfo(state, persson){
+      const targetPersson = state.users.find(user => user.id == persson.id) 
+      targetPersson.fullName = persson.fullName
+      targetPersson.phoneNumber = persson.phoneNumber
+      targetPersson.email = persson.email
+      targetPersson.birthDate = persson.birthDate
+      targetPersson.gender = persson.gender
+    },
+    addressEdit(state, persson){
+      const targetPersson = state.users.find(user => user.id == persson.id) 
 
     }
   },

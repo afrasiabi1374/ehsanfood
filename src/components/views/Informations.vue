@@ -8,28 +8,34 @@
     const userInfo = reactive(store.getters.targetUser)
     onBeforeMount(()=>{
     })
-    const fullName = ref(userInfo.fullName)
-    const mobile = ref(userInfo.phoneNumber)
-    const email = ref(userInfo.email)
-    const date = ref(userInfo.birthDate)
-    const gender = ref(userInfo.gender)
+    const info = reactive({
+        fullName : ref(userInfo.fullName),
+        phoneNumber : ref(userInfo.phoneNumber),
+        email : ref(userInfo.email),
+        birthDate : ref(userInfo.birthDate),
+        gender : ref(userInfo.gender),
+        id: ref(userInfo.id)
+    })
+    const saveInfo = (info) => {
+        console.log('asas',info.id);
+        store.commit('saveInfo', JSON.parse(JSON.stringify(info)))
+    }
 </script>
 <template>
     <form class="info-container flex-center">
-        {{userInfo}}
-        <InputC    v-model="fullName"  class="info-input" inputLabel='نام و نام خانوادکی' inputWidth="220" inputType="text" />
-        <InputC   v-model="mobile"  class="info-input" inputLabel='شماره موبایل' inputWidth="220" inputType="text" />
-        <InputC   v-model="email"  class="info-input" inputLabel='ایمیل' inputWidth="220" inputType="text" />
-            <date-picker class="info-input" v-model="date"></date-picker>
+        <InputC    v-model="info.fullName"  class="info-input" inputLabel='نام و نام خانوادکی' inputWidth="220" inputType="text" />
+        <InputC   v-model="info.phoneNumber"  class="info-input" inputLabel='شماره موبایل' inputWidth="220" inputType="text" />
+        <InputC   v-model="info.email"  class="info-input" inputLabel='ایمیل' inputWidth="220" inputType="text" />
+            <date-picker class="info-input" v-model="info.birthDate"></date-picker>
         <div class="gender">
             <h5>جنسیت:</h5>
-            <RadioC  :checked = "gender === 'مرد'? true : false"  v-model="gender" inputLabel='مرد' name="gender" val="مرد" />
-            <RadioC  :checked = "gender === 'زن'? true : false" v-model="gender" inputLabel='زن'  name="gender" val="زن" />
+            <RadioC  :checked = "info.gender === 'مرد'? true : false"  v-model="info.gender" inputLabel='مرد' name="gender" val="مرد" />
+            <RadioC  :checked = "info.gender === 'زن'? true : false" v-model="info.gender" inputLabel='زن'  name="gender" val="زن" />
         </div>
         <div class="date-gender">
 
-        </div>
-        <button class="send-sms-btn flex-center c-pointer">ذخیره اطلاعات</button>
+        </div>{{userInfo}}
+        <button @click.prevent="saveInfo(info)" class="send-sms-btn flex-center c-pointer">ذخیره اطلاعات</button>
     </form>
 </template>
 
