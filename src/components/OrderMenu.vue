@@ -8,8 +8,10 @@
   import ModalFoodCardC from './ModalFoodCardC.vue';
 import { onBeforeRouteLeave } from 'vue-router';
   const store = useStore()
-  const foods = computed(()=>{
-    return store.getters.allFoods
+  const valueForSearch = ref('')
+  let foods = ref(store.getters.allFoods)
+  const showFoods = computed(()=>{
+      return foods.value
   })
   const ModalForCard = ref(false)
   const modalFood = ref('')
@@ -17,7 +19,6 @@ import { onBeforeRouteLeave } from 'vue-router';
     modalFood.value = food
     ModalForCard.value = true
   }
-  const valueForSearch = ref('')
 
 
   onMounted(()=>{
@@ -81,7 +82,7 @@ import { onBeforeRouteLeave } from 'vue-router';
 <template>
   <div  class="container w-full ">
     <div id="categy-Box" class="categories">
-      <template v-for="(category, i) in foods" :key="i">
+      <template v-for="(category, i) in showFoods" :key="i">
         <a :href="'#'+category.categoryId" id="cat-link" class="category flex-column-center c-pointer">
           <img :src="'../../src/' + category.categoryImage" alt="category-image" class="img-cat" draggable="false" >
           <h3 class="cat-caption" >{{category.category}}</h3>
@@ -91,7 +92,7 @@ import { onBeforeRouteLeave } from 'vue-router';
     </div>
     <div class=" search-container">
       <div class="search-box-container">
-        <InputC v-model="valueForSearch" inputLabel="جستجو" />
+        <InputC  v-model="valueForSearch" inputLabel="جستجو" />
       </div>
     </div>
     <div>

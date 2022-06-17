@@ -8,6 +8,7 @@ export const store =   createStore({
         category: 'چلوها',
         categoryId: 'chelo',
         categoryImage: 'assets/img/cat-icons/چلوها.png',
+        id:1,
         child: [
           {
             id:1,
@@ -16,6 +17,7 @@ export const store =   createStore({
             price: 385000,
             count: 14,
             img: 'assets/img/foods/chelo/چلوکباب لقمه 2سیخ.jpg',
+            catId:1
           },
           {
             id:2, 
@@ -24,6 +26,7 @@ export const store =   createStore({
             price: 385000,
             count: 14,
             img: 'assets/img/foods/chelo/چلو کباب سلطانی ویژه محسن.jpg',
+            catId:1
           },
           {
             id:3,
@@ -32,6 +35,7 @@ export const store =   createStore({
             price: 128250,
             count: 14,
             img: 'assets/img/foods/chelo/چلو کباب لقمه.jpg',
+            catId:1
           },
           {
             id:4,
@@ -40,6 +44,7 @@ export const store =   createStore({
             price: 261250,
             count: 14,
             img: 'assets/img/foods/chelo/چلو کباب برگ ممتاز محسن.jpg',
+            catId:1
           },
           {
             id:5,
@@ -48,6 +53,7 @@ export const store =   createStore({
             price: 190000,
             count: 14,
             img: 'assets/img/foods/chelo/چلو کباب برگ مخصوص.jpg',
+            catId:1
           },
           {
             id:6,
@@ -56,6 +62,7 @@ export const store =   createStore({
             price: 128250,
             count: 14,
             img: 'assets/img/foods/chelo/جوجه کباب با برنج.jpg',
+            catId:1
           },
           {
             id:7,
@@ -64,6 +71,7 @@ export const store =   createStore({
             price: 128250,
             count: 14,
             img: 'assets/img/foods/chelo/چلو کباب فیله گوسفندی.jpg',
+            catId:1
           },
           {
             id:8,
@@ -72,6 +80,7 @@ export const store =   createStore({
             price: 128250,
             count: 14,
             img: 'assets/img/foods/chelo/چلو کباب سلطانی.jpg',
+            catId:1
           },
           {
             id:9,
@@ -80,6 +89,7 @@ export const store =   createStore({
             price: 108250,
             count: 14,
             img: 'assets/img/foods/chelo/زرشک پلو با مرغ.jpg',
+            catId:1
           },
           {
             id:10,
@@ -88,6 +98,7 @@ export const store =   createStore({
             price: 128250,
             count: 14,
             img: 'assets/img/foods/chelo/چلو کباب لقمه.jpg',
+            catId:1
           },
           {
             id:11,
@@ -96,6 +107,7 @@ export const store =   createStore({
             price: 128250,
             count: 14,
             img: 'assets/img/foods/chelo/باقالی پلو با مرغ.jpg',
+            catId:1
           },
           {
             id:12,
@@ -104,6 +116,7 @@ export const store =   createStore({
             price: 109250,
             count: 14,
             img: 'assets/img/foods/chelo/شیرین پلو با مرغ.jpg',
+            catId:1
           },
           {
             id:13,
@@ -112,6 +125,7 @@ export const store =   createStore({
             price: 114000,
             count: 14,
             img: 'assets/img/foods/chelo/آلبالو پلو با مرغ.jpg',
+            catId:1
           },
           {
             id:14,
@@ -120,6 +134,7 @@ export const store =   createStore({
             price: 128250,
             count: 14,
             img: 'assets/img/foods/chelo/شیرین پلو.jpg',
+            catId:1
           },
           {
             id:15,
@@ -128,6 +143,7 @@ export const store =   createStore({
             price: 118250,
             count: 14,
             img: 'assets/img/foods/chelo/ته چین مرغ.jpg',
+            catId:1
           },
           {
             id:16,
@@ -136,6 +152,7 @@ export const store =   createStore({
             price: 78250,
             count: 14,
             img: 'assets/img/foods/chelo/آلبالو پلو.jpg',
+            catId:1
           },
           {
             id:17,
@@ -144,6 +161,7 @@ export const store =   createStore({
             price: 50250,
             count: 14,
             img: 'assets/img/foods/chelo/چلو کره.jpg',
+            catId:1
           },
           {
             id:18,
@@ -152,6 +170,7 @@ export const store =   createStore({
             price: 278250,
             count: 14,
             img: 'assets/img/foods/chelo/چلو ماهیچه ویژه.jpg',
+            catId:1
           },
           {
             id:19,
@@ -160,6 +179,7 @@ export const store =   createStore({
             price: 123250,
             count: 14,
             img: 'assets/img/foods/chelo/چلوکباب وزیری.jpg',
+            catId:1
           },
           {
             id:20,
@@ -168,6 +188,7 @@ export const store =   createStore({
             price: 68250,
             count: 14,
             img: 'assets/img/foods/chelo/باقالی پلو.jpg',
+            catId:1
           },
           {
             id:21,
@@ -176,6 +197,7 @@ export const store =   createStore({
             price: 268250,
             count: 14,
             img: 'assets/img/foods/chelo/باقالی پلو با ماهیچه ویژه.jpg',
+            catId:1
           },
           {
             id:22,
@@ -184,6 +206,7 @@ export const store =   createStore({
             price: 168250,
             count: 14,
             img: 'assets/img/foods/chelo/باقالی پلو.jpg',
+            catId:1
           },
           {
             id:23,
@@ -192,6 +215,7 @@ export const store =   createStore({
             price: 268250,
             count: 14,
             img: 'assets/img/foods/chelo/باقالی پلو با گوشت مخصوص سرخ شده.jpg',
+            catId:1
           },
           {
             id:24,
@@ -200,6 +224,7 @@ export const store =   createStore({
             price: 298250,
             count: 14,
             img: 'assets/img/foods/chelo/آلبالو پلو با ماهیچه ویژه.jpg',
+            catId:1
           },
           {
             id:25,
@@ -208,6 +233,7 @@ export const store =   createStore({
             price: 288250,
             count: 14,
             img: 'assets/img/foods/chelo/آلبالو پلو با گوشت مخصوص سرخ شده.jpg',
+            catId:1
           },
 
         ]
@@ -217,6 +243,7 @@ export const store =   createStore({
         category: 'خوراک ها',
         categoryId: 'khorak',
         categoryImage: ('assets/img/cat-icons/خوراک.png'),
+        id:2,
         child: [
 
           {
@@ -226,6 +253,7 @@ export const store =   createStore({
             price: 156250,
             count: 14,
             img: 'assets/img/foods/khorak/خوراک برگ مخصوص.jpg',
+            catId:2
           },
           {
             id:27,
@@ -234,6 +262,7 @@ export const store =   createStore({
             price: 118750,
             count: 14,
             img: 'assets/img/foods/khorak/جوجه کباب با استخوان.jpg',
+            catId:2
           },
           {
             id:28,
@@ -242,6 +271,7 @@ export const store =   createStore({
             price: 204250,
             count: 14,
             img: 'assets/img/foods/khorak/خوراک لقمه 2 سیخ.jpg',
+            catId:2
           },
           {
             id:29,
@@ -250,6 +280,7 @@ export const store =   createStore({
             price: 190000,
             count: 14,
             img: 'assets/img/foods/khorak/خوراک وزیری.jpg',
+            catId:2
           },
           {
             id:30,
@@ -258,6 +289,7 @@ export const store =   createStore({
             price: 247250,
             count: 14,
             img: 'assets/img/foods/khorak/خوراک فیله گوسفندی.jpg',
+            catId:2
           },
           {
             id:31,
@@ -266,6 +298,7 @@ export const store =   createStore({
             price: 242250,
             count: 14,
             img: 'assets/img/foods/khorak/خوراک گوشت مخصوص سرخ شده.jpg',
+            catId:2
           },
           {
             id:32,
@@ -274,6 +307,7 @@ export const store =   createStore({
             price: 199250,
             count: 14,
             img: 'assets/img/foods/khorak/خوراک میگو سوخاری.jpg',
+            catId:2
           },
           {
             id:33,
@@ -282,6 +316,7 @@ export const store =   createStore({
             price: 106250,
             count: 14,
             img: 'assets/img/foods/khorak/خوراک جوجه کباب.jpg',
+            catId:2
           },
           {
             id:34,
@@ -290,6 +325,7 @@ export const store =   createStore({
             price: 276250,
             count: 14,
             img: 'assets/img/foods/khorak/خوراک ماهیچه ویژه.jpg',
+            catId:2
           },
           {
             id:35,
@@ -298,6 +334,7 @@ export const store =   createStore({
             price: 109250,
             count: 14,
             img: 'assets/img/foods/khorak/خوراک لقمه.jpg',
+            catId:2
           },
           {
             id:36,
@@ -306,6 +343,7 @@ export const store =   createStore({
             price: 114250,
             count: 14,
             img: 'assets/img/foods/khorak/خوراک فیله مرغ کبابی.jpg',
+            catId:2
           },
           {
             id:37,
@@ -314,6 +352,7 @@ export const store =   createStore({
             price: 99250,
             count: 14,
             img: 'assets/img/foods/khorak/خوراک شنیتسل مرغ.jpg',
+            catId:2
           },
           {
             id:38,
@@ -322,6 +361,7 @@ export const store =   createStore({
             price: 89250,
             count: 14,
             img: 'assets/img/foods/khorak/خوراک مرغ.jpg',
+            catId:2
           },
           {
             id:39,
@@ -330,6 +370,7 @@ export const store =   createStore({
             price: 213250,
             count: 14,
             img: 'assets/img/foods/khorak/خوراک سلطانی.jpg',
+            catId:2
           },
           {
             id:40,
@@ -338,6 +379,7 @@ export const store =   createStore({
             price: 209250,
             count: 14,
             img: 'assets/img/foods/khorak/خوراک برگ ممتاز.jpg',
+            catId:2
           },
           {
             id:41,
@@ -346,6 +388,7 @@ export const store =   createStore({
             price: 256250,
             count: 14,
             img: 'assets/img/foods/khorak/شیشلیک با استخوان.jpg',
+            catId:2
           },
           {
             id:42,
@@ -354,6 +397,7 @@ export const store =   createStore({
             price: 339250,
             count: 14,
             img: 'assets/img/foods/khorak/خوراک سلطانی ویژه.jpg',
+            catId:2
           },
 
         ]
@@ -362,6 +406,7 @@ export const store =   createStore({
         category: 'خورشت ها',
         categoryId: 'khoresht',
         categoryImage: ('assets/img/cat-icons/خورشت ها.png'),
+        id:3,
         child: [
           {
             id:43,
@@ -370,6 +415,7 @@ export const store =   createStore({
             price: 88250,
             count: 14,
             img: 'assets/img/foods/khoresht/خورشت فسنجان خالی.jpg',
+            catId:3
           },
           {
             id:44,
@@ -378,6 +424,7 @@ export const store =   createStore({
             price: 88250,
             count: 14,
             img: 'assets/img/foods/khoresht/خورشت فسنجان خالی.jpg',
+            catId:3
           },
           {
             id:45,
@@ -386,6 +433,7 @@ export const store =   createStore({
             price: 99250,
             count: 14,
             img: 'assets/img/foods/khoresht/چلو خورشت فسنجان.jpg',
+            catId:3
           },
           {
             id:46,
@@ -394,6 +442,7 @@ export const store =   createStore({
             price: 99250,
             count: 14,
             img: 'assets/img/foods/khoresht/چلو خورشت قیمه بادمجان گوسفندی.jpg',
+            catId:3
           },
           {
             id:47,
@@ -402,6 +451,7 @@ export const store =   createStore({
             price: 92250,
             count: 14,
             img: 'assets/img/foods/khoresht/خورشت فسنجان خالی.jpg',
+            catId:3
           },
         ]
       },
@@ -409,6 +459,7 @@ export const store =   createStore({
         category: 'دسرها و سالادها',
         categoryId: 'salad',
         categoryImage: ('assets/img/cat-icons/دسرها و سالادها.png'),
+        id:4,
         child: [
           {
             id:48,
@@ -417,6 +468,7 @@ export const store =   createStore({
             price: 88250,
             count: 14,
             img: 'assets/img/foods/deser-salad/سالاد سزار.jpg',
+            catId:4
           },
           {
             id:49,
@@ -425,6 +477,7 @@ export const store =   createStore({
             price: 15250,
             count: 14,
             img: 'assets/img/foods/deser-salad/سبزی خوردن.jpg',
+            catId:4
           },
           {
             id:50,
@@ -433,6 +486,7 @@ export const store =   createStore({
             price: 13250,
             count: 14,
             img: 'assets/img/foods/deser-salad/سالاد شیرازی.jpg',
+            catId:4
           },
           {
             id:51,
@@ -441,6 +495,7 @@ export const store =   createStore({
             price: 25250,
             count: 14,
             img: 'assets/img/foods/deser-salad/سوپ روز.jpg',
+            catId:4
           },
           {
             id:52,
@@ -449,6 +504,7 @@ export const store =   createStore({
             price: 60250,
             count: 14,
             img: 'assets/img/foods/deser-salad/سالاد فصل.jpg',
+            catId:4
           },
           {
             id:53,
@@ -457,6 +513,7 @@ export const store =   createStore({
             price: 12250,
             count: 14,
             img: 'assets/img/foods/deser-salad/ماست موسیر.jpg',
+            catId:4
           },
           {
             id:54,
@@ -465,6 +522,7 @@ export const store =   createStore({
             price: 35250,
             count: 14,
             img: 'assets/img/foods/deser-salad/زیتون پرورده.jpg',
+            catId:4
           },
           {
             id:55,
@@ -473,6 +531,7 @@ export const store =   createStore({
             price: 30250,
             count: 14,
             img: 'assets/img/foods/deser-salad/سیب زمینی سرخ شده.jpg',
+            catId:4
           },
           {
             id:56,
@@ -481,6 +540,7 @@ export const store =   createStore({
             price: 20250,
             count: 14,
             img: 'assets/img/foods/deser-salad/ماست وخیار با گردو.jpg',
+            catId:4
           },
         ]
       },
@@ -488,6 +548,7 @@ export const store =   createStore({
         category: 'نوشیدنی',
         categoryId: 'drink',
         categoryImage: ('assets/img/cat-icons/نوشیدنی.png'),
+        id:5,
         child: [
           {
             id:57,
@@ -496,6 +557,7 @@ export const store =   createStore({
             price: 13820,
             count: 14,
             img: 'assets/img/foods/driks/دوغ نیم لیتری.jpg',
+            catId:5
           },
           {
             id:58,
@@ -504,6 +566,7 @@ export const store =   createStore({
             price: 13820,
             count: 14,
             img: 'assets/img/foods/driks/دوغ نیم لیتری.jpg',
+            catId:5
           },
           {id:59,
             name: 'شربت خاکشیر',
@@ -511,6 +574,7 @@ export const store =   createStore({
             price: 18820,
             count: 14,
             img: 'assets/img/foods/driks/شربت خاکشیر.jpg',
+            catId:5
           },
           {
             id:60,
@@ -519,6 +583,7 @@ export const store =   createStore({
             price: 9820,
             count: 14,
             img: 'assets/img/foods/driks/نوشابه قوطی.jpg',
+            catId:5
           },
           {
             id:61,
@@ -527,6 +592,7 @@ export const store =   createStore({
             price: 14820,
             count: 14,
             img: 'assets/img/foods/driks/نوشابه خانواده.jpg',
+            catId:5
           },
           {
             id:62,
@@ -535,6 +601,7 @@ export const store =   createStore({
             price: 13820,
             count: 14,
             img: 'assets/img/foods/driks/دلستر هی دی.jpg',
+            catId:5
           },
           {
             id:63,
@@ -543,6 +610,7 @@ export const store =   createStore({
             price: 5820,
             count: 14,
             img: 'assets/img/foods/driks/آب معدنی.jpg',
+            catId:5
           },
         ]
       }
@@ -555,12 +623,6 @@ export const store =   createStore({
         birthDate: '1374/11/17',
         gender: 'مرد',
         email:'mohammad.aligiga@gmailcom',
-        cart: [
-          {
-            id:3,
-            count: 2
-          }
-        ],
         address: [
           {
             id: 1,
@@ -571,7 +633,18 @@ export const store =   createStore({
         password: 12345678
       }
     ],
-    activeUser: {}
+    activeUser: {},
+    cart: [
+      {
+        userId:3,
+        userFoods: [
+          
+        ]
+      }
+    ],
+    ghaza: [
+
+    ]
   },
   getters: {
     allFoods: (state) => {
