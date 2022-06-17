@@ -604,10 +604,10 @@ export const store =   createStore({
     },
     saveAddress(state, address) {
       const targetUser = state.users.find( user => user.id == state.activeUser.id)
-      address.id
+      address.id != ''
       ?
 
-      targetUser.address.splice(targetUser.address.findIndex(add => add.id == address.id), 1, ...add)
+      targetUser.address.splice(targetUser.address.findIndex(add => add.id == address.id), 1, {...address})
 
       :
       targetUser.address.push({id: 1 + targetUser.address.length + 1, ...address})
