@@ -4,7 +4,7 @@ import { onMounted, ref } from 'vue';
     const props = defineProps({
         modelValue: Boolean,
     })
-    const emit = defineEmits(['update:modelValue'])
+    const emit = defineEmits(['update:modelValue','modalClosed'])
     onMounted(()=>{
 
 
@@ -29,6 +29,7 @@ import { onMounted, ref } from 'vue';
 
     const closeModal = () => {
         emit('update:modelValue', false)
+        emit('modalClosed')
     }
 </script>
 <template>

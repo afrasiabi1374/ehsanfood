@@ -6,7 +6,8 @@
 
     const addr = reactive({
         name: '',
-        addressText: ''
+        addressText: '',
+        id: ''
     })
     const store = useStore()
     const saveAddress = (addr) => {
@@ -17,10 +18,18 @@
     const deleteAddress = (id) => {
         store.commit('deleteAddress', id)
     }
-    const addressEdit = (addr) => {
-        store.commit('addressEdit', id)
-    }
 
+    const openModalForEdit = (val) => {
+        activeModal.value = true
+        addr.name = val.name
+        addr.addressText = val.addressText
+        addr.id = val.id
+    }
+    const closedModal = () =>{
+        addr.name = ''
+        addr.addressText = ''
+        addr.id = ''
+    }
 </script>
 <template>
     <div class="address-container ">
@@ -29,7 +38,7 @@
             <button class="send-address-btn flex-center " @click="activeModal = true">افزودن آدرس</button>
         </div>
         <template v-for="(item, i ) in addressForShow" :key="i">
-            <div class="address-item" >
+            <div class="address-item">
                 <div class="address-detail">
                     <img src="../../assets/img/icons/location.png" alt="" class="location-icon">
                     <h4 class="address-name">{{item.name}}</h4>
@@ -39,14 +48,13 @@
                     </small>
                 </div>
                 <div class="address-operation">
-                    <div class="edit c-pointer"  @click="deleteAddress(item.id)"><img src="../../assets/img/icons/delete.png" alt=""></div>
-                    <div class="delete c-pointer"><img src="../../assets/img/icons/pencil.png" alt=""></div>
+                    <div class="delete c-pointer"  @click="deleteAddress(item.id)"><img src="../../assets/img/icons/delete.png" alt=""></div>
+                    <div class="edit c-pointer" @click="openModalForEdit({...item})"><img src="../../assets/img/icons/pencil.png" alt=""></div>
                 </div>
             </div>
-
         </template>
     </div>
-    <ModalC v-model="activeModal">
+    <ModalC v-model="activeModal" @modalClosed="closedModal">
         <form class="add-container">
             <InputC   v-model="addr.name"  class="input-address-name " inputLabel='نام آدرس' inputWidth="20%" inputType="text" />
             <InputC   v-model="addr.addressText"   class="input-address" inputLabel='ورود آدرس' inputWidth="100%" inputType="text" />

@@ -23,10 +23,10 @@ const router = createRouter({
 router.beforeEach( (to, from, next) => {
     const pattern = /(\/profile)/
     let patternTest =  pattern.test(to.path)
-    console.log(patternTest);
+    // console.log(patternTest);
     if (patternTest) {
-        console.log(patternTest);
-        console.log(cookies.get('userCookie'));
+        // console.log(patternTest);
+        // console.log(cookies.get('userCookie'));
         if(cookies.get('userCookie')){
             next()
         }else {
