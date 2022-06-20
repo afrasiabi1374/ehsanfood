@@ -20,7 +20,14 @@
         if (targetUser) {
             cookies.set('userCookie',props.phoneNumber, '10d')
             store.commit('setActiveUser', props.phoneNumber)
-            store.getters.targetUser
+            const targetUser = store.getters.targetUser
+            const tempCartShow = store.getters.tempCartShow
+            if (tempCartShow.length >= 1) {
+
+                store.commit('addFromTempToUserCart')
+
+            }
+
              emit('closeModal', false)
              emit('update:levelNumber', 0)
             router.push('/profile/informations')

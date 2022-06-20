@@ -1,37 +1,43 @@
 <script setup>
-    const props = defineProps({
-        name: String,
-        describe: String,
-        img: String,
-        count: Number,
-        price: Number,
-        off: Number
+import { useStore } from 'vuex';
 
+    const props = defineProps({
+        food: Object,
+        off: Number
     })
+    const store = useStore()
+    const addCart = (food) => {
+        if (store.getters.targetUser.id) {
+            store.commit('addCart', food)
+        }else{
+            store.commit('addToTempCart', food)
+        }
+        
+    }
 </script>
 
 <template>
     <div class="card-container c-pointer">
         <div class="describe-image">
             <div class="off-percent flex-center digit">{{off}}%</div>
-            <img :src="'../../src/'+img" alt="product-image" draggable="false" class="pro-img">
+            <img :src="'../../src/'+food.img" alt="product-image" draggable="false" class="pro-img">
             <div class="describe flex-center">
                 <p class="d-text">
-                    {{describe}}
+                    {{food.describe}}
                 </p>
             </div>
         </div>
         <div class="card-content">
-            <h5 class="product-title">{{name}}</h5>
+            <h5 class="product-title">{{food.name}}</h5>
             <div class="price-add-container">
                 <div class="price-container">
-                    <h6 class="price digit">{{price}} تومان</h6>
-                    <small class="off-price digit">{{(price)-(price*(off/100))}} تومان</small>
+                    <h6 class="price digit">{{food.price}} تومان</h6>
+                    <small class="off-price digit">{{(food.price)-(food.price*(off/100))}} تومان</small>
 
                 </div>
                 <div class="addcart-mojoodnist">
-                    <div class="add-cart">
-                        <img class="add-icon c-pointer" @click.stop="true" src="../assets/img/icons/plus.png" alt="add to cart">
+                    <div class="add-cart" >
+                        <img @click.stop="addCart(food)" class="add-icon c-pointer"  src="../assets/img/icons/plus.png" alt="add to cart">
                     </div>
                 </div>
             </div>

@@ -6,13 +6,21 @@
   import CardC from './CardC.vue';
   import ModalC from './ModalC.vue';
   import ModalFoodCardC from './ModalFoodCardC.vue';
-import { onBeforeRouteLeave } from 'vue-router';
+  import { onBeforeRouteLeave } from 'vue-router';
   const store = useStore()
   const valueForSearch = ref('')
-  let foods = ref(store.getters.allFoods)
-  const showFoods = computed(()=>{
-      return foods.value
+  let catsStore = ref(store.getters.allFoods)
+  const cats = computed(()=>{
+      return catsStore.value
   })
+
+  const foods = computed(()=>{
+    if (valueForSearch.value != '') {
+      return store.getters.ghaza.filter(item => item.name.includes(valueForSearch.value))
+    }
+    return store.getters.ghaza
+  })
+
   const ModalForCard = ref(false)
   const modalFood = ref('')
   function addFooModal(food){
@@ -50,7 +58,7 @@ import { onBeforeRouteLeave } from 'vue-router';
 
 
               })
-              console.log(item, item.getBoundingClientRect().top);
+              // console.log(item, item.getBoundingClientRect().top);
               
 
             }
@@ -82,7 +90,7 @@ import { onBeforeRouteLeave } from 'vue-router';
 <template>
   <div  class="container w-full ">
     <div id="categy-Box" class="categories">
-      <template v-for="(category, i) in showFoods" :key="i">
+      <template v-for="(category, i) in cats" :key="i">
         <a :href="'#'+category.categoryId" id="cat-link" class="category flex-column-center c-pointer">
           <img :src="'../../src/' + category.categoryImage" alt="category-image" class="img-cat" draggable="false" >
           <h3 class="cat-caption" >{{category.category}}</h3>
@@ -96,11 +104,11 @@ import { onBeforeRouteLeave } from 'vue-router';
       </div>
     </div>
     <div>
-      <template v-for="(category, i) in foods" :key="i">
+      <template v-for="(category, i) in cats" :key="i">
         <h3 :id="category.categoryId" class="cat-title">{{category.category}}</h3>
         <div class="product-container">
-          <template v-for="(food, index) in category.child" :key="index">
-            <CardC @click="addFooModal(food)"  :name="food.name" :price="food.price" :describe="food.describe" :img="food.img" :count="food.count" :off="5"  />
+          <template  v-for="(food, index) in foods" :key="index">
+            <CardC  v-if="food.catId == category.id"  @click="addFooModal(food)"  :food="food" :off="5"  />
           </template>
         </div>
       </template>

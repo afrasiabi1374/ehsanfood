@@ -25,7 +25,7 @@ const goback = () => {
 
 const store = useStore()
 
-const addUser = () => {
+const addUser = async () => {
     document.body.style.overflow = 'scroll'
     const allInformations = reactive({
     fullName: fullName.value,
@@ -36,20 +36,15 @@ const addUser = () => {
     phoneNumber: props.phoneNumber,
     birthDate: date.value
 })
-const allUsers = ref(store.getters.allUsers)
-if (allUsers.value.find(user => user.phoneNumber === props.phoneNumber)) {
-    alert('شماره تلفن وارد شده تکراری است .')
-}else {
-    store.commit('saveUser',  {...allInformations})
+
+    store.commit('saveUser',   {...allInformations})
+
     cookies.set('userCookie',props.phoneNumber, '10d')
     store.commit('setActiveUser', props.phoneNumber)
     emit('closeModal', false)
-    console.log('کوکی ها',cookies.get('userCookie'));
-    console.log('غیر تکراری', allUsers.value); 
     router.push('/profile/informations')
-}
+
     
-    console.log();
 }
 </script>
 
