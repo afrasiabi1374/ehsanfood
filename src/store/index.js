@@ -674,7 +674,7 @@ export const store =   createStore({
     },
     setActiveUser(state, phoneNumber){
       state.activeUser = state.users.find(user => user.phoneNumber == phoneNumber)
-      console.log('this is active user ====>>>', state.activeUser);
+      console.log('this is active user =========>>>', state.activeUser);
     },
     changePass(state,password){
       state.users.find(user => user.password == state.activeUser.password).password = password
