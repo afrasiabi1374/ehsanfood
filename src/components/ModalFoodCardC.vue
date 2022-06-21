@@ -1,13 +1,29 @@
 <script setup>
+import { useStore } from 'vuex';
+
     const props = defineProps({
-        name: String,
-        describe: String,
-        img: String,
-        count: Number,
-        price: Number,
+        food: Object,
         off: Number,
         modelValue: Boolean
     })
+
+    const store = useStore()
+    const addCart = (food) => {
+        if (store.getters.targetUser.id) {
+            store.commit('addCart', JSON.parse(JSON.stringify(food)))
+        }else{
+            store.commit('addToTempCart', JSON.parse(JSON.stringify(food)))
+        }
+        
+    }
+    const deleteFromCart = (id) => {
+        if (store.getters.targetUser.id) {
+            store.commit('deleteFromCart', id)
+        }else{
+            store.commit('deleteFromTempCart', id)
+        }
+        
+    }
 
 </script>
 
@@ -15,16 +31,16 @@
     <div :class="['card-container c-pointer', modelValue === true ? '' : '']">
         <div class="describe-image">
             <div class="off-percent flex-center digit">{{off}}% </div>
-            <img :src="'../../src/'+img" alt="product-image" draggable="false" class="pro-img">
+            <img :src="'../../src/'+food.img" alt="product-image" draggable="false" class="pro-img">
         </div>
         <div class="card-content">
-            <h3 class="product-title">{{name}}</h3>
+            <h3 class="product-title">{{food.name}}</h3>
             <div class="price-add-container">
                 <div class="price-container">
-                    <h4 class="price digit">{{price}} تومان</h4>
-                    <h4 class="off-price digit">{{(price)-(price*(off/100))}} تومان</h4>
+                    <h4 class="price digit">{{food.price}} تومان</h4>
+                    <h4 class="off-price digit">{{(food.price)-(food.price*(off/100))}} تومان</h4>
                 <p class="d-text">
-                    {{describe}}
+                    {{food.describe}}
                 </p>
                 </div>
 
@@ -32,15 +48,16 @@
         </div>
         <div class="cart-update‌">
             <div class="update">
-                <p>بروزرسانی</p>
-                <div class="off-price digit">{{price}} تومان</div>
+                <p>مجموع </p>
+                <div class="off-price digit">{{store.getters.tempCartItem(food.id) * food.price | 0}} تومان</div>
             </div>
             <div class="addcart-mojoodnist">
-                <div class="add-cart">
-                    <img class="icon c-pointer" @click.stop="true" src="../assets/img/icons/plus.png" alt="add to cart">
+                <div class="minus-cart flex-center" v-if="store.getters.tempCartItem(food.id)">
+                    <img class="icon c-pointer" @click.stop="deleteFromCart(food.id)" src="../assets/img/icons/minus.png" alt="add to cart">
                 </div>
-                <div class="minus-cart">
-                    <img class="icon c-pointer" @click.stop="true" src="../assets/img/icons/minus.png" alt="add to cart">
+                <div class="food-count digit">{{store.getters.tempCartItem(food.id)}}</div>
+                <div class="add-cart flex-center">
+                    <img  class="icon c-pointer" @click.stop="addCart(food)" src="../assets/img/icons/plus.png" alt="add to cart">
                 </div>
             </div>
         </div>
@@ -53,8 +70,6 @@
         border-radius: 2px;
         position: absolute;
         width: 32.6%;
-        margin-top: 7px;
-        transform: translateY(-30px);
         background-color: white;
 
         & .off-percent {
@@ -64,7 +79,6 @@
             background-color: #022F5E;
             color: white;
             font-size: 13px;
-            top: 5px;
             left: 5px;
             border-radius: 3px;
         }
@@ -112,11 +126,11 @@
         padding-top: 17px;
     }
     .addcart-mojoodnist {
-        height: 70px;
         display: flex;
         align-items: center;
-        width: 80px;
         justify-content: space-between;
+        height: 80px;
+        width: 80px;
     }
     .cart-update‌ {
         padding: 15px;
@@ -134,23 +148,5 @@
         border-radius: 5px;
         width: 150px;
     }
-    .active {
-        animation-name: anime;
-        animation-duration: .3s;
-        animation-fill-mode: forwards;
-    }
-    @keyframes anime {
-
-        0% {
-            transform: scale(1.5);
-        }
-        100% {
-            transform: scale(1);
-        }
-        
-    }
-
-
-
 
 </style>

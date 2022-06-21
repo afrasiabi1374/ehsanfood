@@ -659,6 +659,9 @@ export const store =   createStore({
     tempCartShow: (state) =>  {
       return state.tempCart
     },
+    tempCartItem: (state) => (id) => {
+      return state.tempCart.find(item=> item.foodId == id)?.foodCount
+    }
   },
   mutations: {
     saveUser(state, personInfo){
@@ -737,7 +740,7 @@ export const store =   createStore({
       isAvailable ?
       isAvailable.foodCount++
       :
-      state.tempCart.push({foodId: food.id, foodCount: 1})
+      state.tempCart.push(JSON.parse(JSON.stringify({foodId: food.id, foodCount: 1})))
       console.log(state.tempCart);
     },
     addFromTempToUserCart(state){
@@ -745,6 +748,13 @@ export const store =   createStore({
       perssonCart.userFoods.push(...state.tempCart)
       console.log('after temp uodate',perssonCart.userFoods)
       state.tempCart = []
+    },
+    deleteFromTempCart(state, id){
+      const isAvailable = state.tempCart.find(item => item.foodId == id)
+      isAvailable.foodCount > 1 ?
+      isAvailable.foodCount-=1
+      :
+      state.tempCart.splice(state.tempCart.findIndex(item=>item.foodId == id), 1)
     }
   },
   actions: {

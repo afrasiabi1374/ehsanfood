@@ -19,7 +19,7 @@ import { onMounted, ref } from 'vue';
 
 
         maskEl.value.forEach(el => el.addEventListener('click', () => {
-            if (props.modelValue === false) {
+            if (props.modelValue == false) {
                 document.body.style.overflow = 'scroll'
             }
         }))

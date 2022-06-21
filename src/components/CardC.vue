@@ -8,16 +8,26 @@ import { useStore } from 'vuex';
     const store = useStore()
     const addCart = (food) => {
         if (store.getters.targetUser.id) {
-            store.commit('addCart', food)
+            store.commit('addCart', JSON.parse(JSON.stringify(food)))
         }else{
-            store.commit('addToTempCart', food)
+            store.commit('addToTempCart', JSON.parse(JSON.stringify(food)))
         }
         
     }
+    const deleteFromCart = (id) => {
+        if (store.getters.targetUser.id) {
+            store.commit('deleteFromCart', id)
+        }else{
+            store.commit('deleteFromTempCart', id)
+        }
+        
+    }
+
+    
 </script>
 
 <template>
-    <div class="card-container c-pointer">
+    <div :class="['card-container', 'c-pointer', store.getters.tempCartItem(food.id)? 'border-blue': '']">
         <div class="describe-image">
             <div class="off-percent flex-center digit">{{off}}%</div>
             <img :src="'../../src/'+food.img" alt="product-image" draggable="false" class="pro-img">
@@ -36,6 +46,12 @@ import { useStore } from 'vuex';
 
                 </div>
                 <div class="addcart-mojoodnist">
+                    <div class="add-cart" v-if="store.getters.tempCartItem(food.id)">
+                        <img @click.stop="deleteFromCart(food.id)" class="add-icon c-pointer"  src="../assets/img/icons/minus.png" alt="add to cart">
+                    </div>
+                    <div class="foodCount  digit">
+                        {{store.getters.tempCartItem(food.id)}}
+                    </div>
                     <div class="add-cart" >
                         <img @click.stop="addCart(food)" class="add-icon c-pointer"  src="../assets/img/icons/plus.png" alt="add to cart">
                     </div>
@@ -121,5 +137,15 @@ import { useStore } from 'vuex';
         position: absolute;
         transform: translateY(20px);
         transition: all .2s;
+    }
+
+    .addcart-mojoodnist{
+        display: flex;
+        justify-content: space-between;
+        width: 27%;
+
+    }
+    .border-blue{
+        border: 1px solid blue;
     }
 </style>

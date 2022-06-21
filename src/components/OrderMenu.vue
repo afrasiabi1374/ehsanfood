@@ -31,6 +31,9 @@
 
   onMounted(()=>{
 
+            if (ModalForCard.value == false) {
+                document.body.style.overflow = 'scroll'
+            }
     const categoryBox = document.getElementById('categy-Box')
     const sticky = ref(categoryBox.getBoundingClientRect().top)
     const catTitle = ref(document.querySelectorAll('.cat-title'))
@@ -85,6 +88,9 @@
     window.removeEventListener('scroll', ()=>{
       stickyCat()
     })
+    if (modal) {
+      
+    }
   })
 </script>
 <template>
@@ -113,9 +119,11 @@
         </div>
       </template>
     </div>
-    <ModalC v-model="ModalForCard">
-        <ModalFoodCardC  v-model="ModalForCard" @click.stop v-if="ModalForCard"   :name="modalFood.name" :price="modalFood.price" :describe="modalFood.describe" :img="modalFood.img" :count="modalFood.count" :off="5"  />
-    </ModalC>
+        <ModalC   v-model="ModalForCard">
+          <TransitionGroup  name="smaller"  key="modalCard">
+            <ModalFoodCardC v-if="ModalForCard"  v-model="ModalForCard" @click.stop    :food="modalFood" :off="5"  />
+          </TransitionGroup>
+        </ModalC>
   </div>
 </template>
 
@@ -192,5 +200,21 @@
   padding-top: 100px;
   padding-bottom: 30px;
   padding-right: 18px;
+}
+.smaller-enter-active {
+  transform: scale(1);
+    opacity: 1;
+  transition: all .3s ease-out;
+
+}
+
+.smaller-leave-active {
+  transition: all .2s cubic-bezier(1, 0.5, 0.8, 1);
+}
+
+.smaller-enter-from,
+.smaller-leave-to {
+  transform: scale(2);
+  opacity: 0;
 }
 </style>
