@@ -669,19 +669,21 @@ export const store =   createStore({
       const userCart = state.shoppingCart.find(userCart => userCart?.userId == state.activeUser.id)
       const tempCart = state.tempCart
       let total = 0
+      let computedTotal = undefined
       state.activeUser.id  ?
-      total = userCart.reduce(
+      computedTotal = userCart.reduce(
         (prevVal, nextVal)=>{
-          (prevVal.foodCount*state.foods.find(item=>item.id == prevVal.foodId).price) + (nextVal.foodCount*state.foods.find(item=>item.id == nextVal.foodId).price)
+          (prevVal.foodCount*state.foods.find(item=>item.id == prevVal.foodId).price) + (nextVal.foodCount*state.foods.find(item=>item.id == nextVal.foodId).price),total
         }
       )
       :
-      total = tempCart.reduce(
+      computedTotal = tempCart.reduce(
         (prevVal, nextVal)=>{
           (prevVal.foodCount*state.foods.find(item=>item.id == prevVal.foodId).price) + (nextVal.foodCount*state.foods.find(item=>item.id == nextVal.foodId).price)
         }
       )
-      return total
+      console.log()
+      return computedTotal
     }
   },
   mutations: {
