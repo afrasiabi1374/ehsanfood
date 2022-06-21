@@ -664,6 +664,24 @@ export const store =   createStore({
     },
     userCart: (state) => {
       state.shoppingCart.find(userCart => userCart.id == state.activeUser.id)
+    },
+    getTotal:(state)=> {
+      const userCart = state.shoppingCart.find(userCart => userCart?.userId == state.activeUser.id)
+      const tempCart = state.tempCart
+      let total = 0
+      state.activeUser.id  ?
+      total = userCart.reduce(
+        (prevVal, nextVal)=>{
+          (prevVal.foodCount*state.foods.find(item=>item.id == prevVal.foodId).price) + (nextVal.foodCount*state.foods.find(item=>item.id == nextVal.foodId).price)
+        }
+      )
+      :
+      total = tempCart.reduce(
+        (prevVal, nextVal)=>{
+          (prevVal.foodCount*state.foods.find(item=>item.id == prevVal.foodId).price) + (nextVal.foodCount*state.foods.find(item=>item.id == nextVal.foodId).price)
+        }
+      )
+      return total
     }
   },
   mutations: {
