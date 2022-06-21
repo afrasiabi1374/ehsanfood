@@ -1,8 +1,23 @@
+<script setup>
+import { computed } from '@vue/reactivity';
+import { useStore } from 'vuex';
+
+    const store = useStore()
+    const activeUser = store.getters.activeUser
+    const cartValues  =  computed(()=>{
+        if (activeUser?.id) {
+            return store.getters.userCart
+        } else {
+            return store.getters.tempCartShow
+        }
+
+    })
+</script>
 <template>
   <div class="container">
-      <h3 class="cart-header">سبد خرید</h3>
+      <h3 class="cart-header">سبد خرید <span v-if="cartValues.length">({{}})</span></h3>
       <div class="cart-items-container">
-          <img class="empty-cart c-pointer" src="../assets/img/icons/sabad-kharid.png"  alt="cart-image" draggable="false">
+         <img class="empty-cart c-pointer" src="../assets/img/icons/sabad-kharid.png"  alt="cart-image" draggable="false">
       </div>
   </div>
 </template>

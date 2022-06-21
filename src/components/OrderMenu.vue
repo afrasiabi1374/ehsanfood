@@ -35,8 +35,8 @@
                 document.body.style.overflow = 'scroll'
             }
     const categoryBox = document.getElementById('categy-Box')
-    const sticky = ref(categoryBox.getBoundingClientRect().top)
-    const catTitle = ref(document.querySelectorAll('.cat-title'))
+    const sticky = ref(categoryBox?.getBoundingClientRect().top)
+    const catTitle = ref(document?.querySelectorAll('.cat-title'))
     const proContainer = ref(document.querySelectorAll('.product-container'))
     const catLink = ref(document.querySelectorAll('#cat-link'))
     const stickyCat = () => {

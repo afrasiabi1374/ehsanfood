@@ -661,6 +661,9 @@ export const store =   createStore({
     },
     tempCartItem: (state) => (id) => {
       return state.tempCart.find(item=> item.foodId == id)?.foodCount
+    },
+    userCart: (state) => {
+      state.shoppingCart.find(userCart => userCart.id == state.activeUser.id)
     }
   },
   mutations: {
