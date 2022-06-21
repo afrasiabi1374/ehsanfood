@@ -15,7 +15,7 @@ import { useStore } from 'vuex';
 </script>
 <template>
   <div class="container">
-      <h3 class="cart-header">سبد خرید <span v-if="cartValues.length">({{store.getters.getTotal}})</span></h3>
+      <h3 class="cart-header">سبد خرید <span v-if="cartValues.length">()</span></h3>
       <div class="cart-items-container">
          <img class="empty-cart c-pointer" src="../assets/img/icons/sabad-kharid.png"  alt="cart-image" draggable="false">
       </div>

@@ -673,15 +673,15 @@ export const store =   createStore({
       state.activeUser.id  ?
       computedTotal = userCart.reduce(
         (prevVal, nextVal) => {
-          return ((prevVal.foodCount*state.foods.find(item=>item.id == prevVal.foodId).price) + (nextVal.foodCount*state.foods.find(item=>item.id == nextVal.foodId).price))
+          return prevVal +  (nextVal.foodCount*state.foods.find(item=>item.id == nextVal.foodId).price)
         }
       )
       :
       computedTotal = tempCart.reduce(
         (prevVal, nextVal) => {
-          console.log(prevVal);
-          return ((prevVal.foodCount*state.foods.find(item=>item.id == prevVal.foodId).price) + (nextVal.foodCount*state.foods.find(item=>item.id == nextVal.foodId).price))
-        }
+          console.log('next count =>',nextVal.foodCount, 'next foodId =>',nextVal.foodId);
+          return prevVal +  (nextVal.foodCount*(state.ghaza.find(item => item.id == nextVal.foodId).price))
+        },total
       )
       console.log()
       return computedTotal
