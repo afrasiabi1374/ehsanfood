@@ -12,6 +12,10 @@ import { useStore } from 'vuex';
         }
 
     })
+
+
+
+
 </script>
 <template>
   <div class="container">
