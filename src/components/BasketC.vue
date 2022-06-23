@@ -13,13 +13,31 @@ import { useStore } from 'vuex';
 
     })
 
-
+    const momayez = () => {
+        const num = '123456789'
+        const numLen = num.length
+        let arr = []
+        for(let i = 3; i <= numLen ; i+=3){
+            const sliced = num.slice(i-3,i)
+            arr.push(sliced)
+        }
+        let element = ''
+        for (let i = 0; i < arr.length; i++) {
+            element +=arr[i]+ ','
+            
+        }
+        let filtered = ''
+        for (let i = 0; i < element.length-1; i++) {
+             filtered += element[i];
+        }
+            console.log(filtered);
+    }
 
 
 </script>
 <template>
   <div class="container">
-      <h3 class="cart-header">سبد خرید <span v-if="cartValues.length">()</span></h3>
+      <h3 class="cart-header" @click="momayez">سبد خرید <span v-if="cartValues.length">()</span></h3>
       <div class="cart-items-container">
          <img class="empty-cart c-pointer" src="../assets/img/icons/sabad-kharid.png"  alt="cart-image" draggable="false">
       </div>
