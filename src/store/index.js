@@ -665,6 +665,12 @@ export const store =   createStore({
     userCart: (state) => {
       state.shoppingCart.find(userCart => userCart.id == state.activeUser.id)
     },
+    showCartItem: (state) => (id) => {
+      let data = ''
+      data = state.ghaza.find( item => item.id == id)
+      console.log(data);
+      return data
+    },
     getTotal:(state)=> {
       const userCart = state.shoppingCart.find(userCart => userCart?.userId == state.activeUser.id)
       const tempCart = state.tempCart
@@ -679,12 +685,13 @@ export const store =   createStore({
       :
       computedTotal = tempCart.reduce(
         (prevVal, nextVal) => {
-          console.log('next count =>',nextVal.foodCount, 'next foodId =>',nextVal.foodId);
+          // console.log('next count =>',nextVal.foodCount, 'next foodId =>',nextVal.foodId);
           return prevVal +  (nextVal.foodCount*(state.ghaza.find(item => item.id == nextVal.foodId).price))
         },total
       )
-      return computedTotal
-    }
+      return computedTotal-(computedTotal*(5/100))
+    },
+
   },
   mutations: {
     saveUser(state, personInfo){
@@ -699,7 +706,7 @@ export const store =   createStore({
     },
     setActiveUser(state, phoneNumber){
       state.activeUser = state.users.find(user => user.phoneNumber == phoneNumber)
-      console.log('this is active user =========>>>', state.activeUser);
+      // console.log('this is active user =========>>>', state.activeUser);
     },
     changePass(state,password){
       state.users.find(user => user.password == state.activeUser.password).password = password
@@ -714,7 +721,7 @@ export const store =   createStore({
 
       :
       targetUser.address.push({id: 1 + targetUser.address.length + 1, ...address})
-      console.log(targetUser.address);
+      // console.log(targetUser.address);
     },
     deleteAddress(state,id){
       const targetUser = state.users.find( user => user.id == state.activeUser.id)
@@ -723,7 +730,7 @@ export const store =   createStore({
     },
     goOut(state){
       const {cookies} = useCookies()
-      console.log(cookies.remove('userCookie'));
+      // console.log(cookies.remove('userCookie'));
       state.activeUser = {}
       
     },
@@ -745,7 +752,7 @@ export const store =   createStore({
       targetCart.userFoods.find(targetFood => targetFood.foodId == food.id).foodCount+=1
       :
       targetCart.userFoods.push({foodCount: 1, foodId: food.id})
-      console.log(targetCart);
+      // console.log(targetCart);
     },
     deleteFromCart(state, food){
       const targetCart = state.shoppingCart.find(targetCart => targetCart.userId == state.activeUser.id)
@@ -755,7 +762,7 @@ export const store =   createStore({
       targetCart.userFoods.find(targetFood => targetFood.foodId == food.id).foodCount-=1
       :
       targetCart.userFoods.splice(targetCart.userFoods.findIndex(item => item.foodId == food.id),1)
-      console.log(targetCart);
+      // console.log(targetCart);
     },
     addToTempCart(state, food){
       const isAvailable = state.tempCart.find(item => item.foodId == food.id)
@@ -763,12 +770,12 @@ export const store =   createStore({
       isAvailable.foodCount++
       :
       state.tempCart.push(JSON.parse(JSON.stringify({foodId: food.id, foodCount: 1})))
-      console.log(state.tempCart);
+      // console.log(state.tempCart);
     },
     addFromTempToUserCart(state){
       const perssonCart = state.shoppingCart.find(item => item.userId == state.activeUser.id)
       perssonCart.userFoods.push(...state.tempCart)
-      console.log('after temp uodate',perssonCart.userFoods)
+      // console.log('after temp uodate',perssonCart.userFoods)
       state.tempCart = []
     },
     deleteFromTempCart(state, id){

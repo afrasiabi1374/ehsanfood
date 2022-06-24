@@ -46,14 +46,14 @@ import { useStore } from 'vuex';
 
                 </div>
                 <div class="addcart-mojoodnist">
-                    <div class="add-cart" v-if="store.getters.tempCartItem(food.id)">
-                        <img @click.stop="deleteFromCart(food.id)" class="add-icon c-pointer"  src="../assets/img/icons/minus.png" alt="add to cart">
+                    <div class="delete-cart" v-if="store.getters.tempCartItem(food.id)">
+                        <img @click.stop="deleteFromCart(food.id)" class="operation-icon c-pointer"  src="../assets/img/icons/minus.png" alt="add to cart">
                     </div>
                     <div class="foodCount  digit">
                         {{store.getters.tempCartItem(food.id)}}
                     </div>
                     <div class="add-cart" >
-                        <img @click.stop="addCart(food)" class="add-icon c-pointer"  src="../assets/img/icons/plus.png" alt="add to cart">
+                        <img @click.stop="addCart(food)" class="operation-icon c-pointer"  src="../assets/img/icons/plus.png" alt="add to cart">
                     </div>
                 </div>
             </div>
@@ -104,7 +104,7 @@ import { useStore } from 'vuex';
         display: flex;
         justify-content: space-between;
     }
-    .add-icon {
+    .operation-icon {
         max-width: 24px;
         height: 24px;
         border: 1px solid #888888 ;
@@ -142,6 +142,7 @@ import { useStore } from 'vuex';
     .addcart-mojoodnist{
         display: flex;
         justify-content: space-between;
+        align-items: center;
         width: 27%;
 
     }

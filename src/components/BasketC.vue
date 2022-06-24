@@ -13,33 +13,81 @@ import { useStore } from 'vuex';
 
     })
 
-    const momayez = () => {
-        const num = '123456789'
-        const numLen = num.length
-        let arr = []
-        for(let i = 3; i <= numLen ; i+=3){
-            const sliced = num.slice(i-3,i)
-            arr.push(sliced)
-        }
-        let element = ''
-        for (let i = 0; i < arr.length; i++) {
-            element +=arr[i]+ ','
+    const momayez = computed(() => {
+        const num = store.getters.getTotal.toString()
+        if (num.length) {
+            const numLen = num.length
+            let arr = []
+            for(let i = 3; i <= numLen ; i+=3){
+                const sliced = num.slice(i-3,i)
+                arr.push(sliced)
+            }
+            let element = ''
+            for (let i = 0; i < arr.length; i++) {
+                element +=arr[i]+ ','
+                
+            }
+            let filtered = ''
+            for (let i = 0; i < element.length-1; i++) {
+                filtered += element[i];
+            }
             
+            return filtered 
         }
-        let filtered = ''
-        for (let i = 0; i < element.length-1; i++) {
-             filtered += element[i];
-        }
-            console.log(filtered);
-    }
 
+
+    })
+
+    let totalCount = computed(() => {
+        let countAll = cartValues.value.reduce((prev, next) => prev + next.foodCount,0)
+        return countAll
+    })
+
+    const addCart = (food) => {
+        if (store.getters.targetUser?.id) {
+            store.commit('addCart', JSON.parse(JSON.stringify(food)))
+        }else{
+            store.commit('addToTempCart', JSON.parse(JSON.stringify(food)))
+        }
+        
+    }
+    const deleteFromCart = (id) => {
+        if (store.getters.targetUser?.id) {
+            store.commit('deleteFromCart', id)
+        }else{
+            store.commit('deleteFromTempCart', id)
+        }
+        
+    }
 
 </script>
 <template>
   <div class="container">
-      <h3 class="cart-header" @click="momayez">سبد خرید <span v-if="cartValues.length">()</span></h3>
+      <div class="cart-header " > <span class="digit" v-if="cartValues.length"> سبد خرید({{totalCount}})</span> <img class="c-pointer" src="../assets/img/icons/delete.png" alt=""></div>
       <div class="cart-items-container">
-         <img class="empty-cart c-pointer" src="../assets/img/icons/sabad-kharid.png"  alt="cart-image" draggable="false">
+         <img v-if="!cartValues.length" class="empty-cart c-pointer" src="../assets/img/icons/sabad-kharid.png"  alt="cart-image" draggable="false">
+         <ul v-else class="food-list">
+            <template v-for="(food, i) in cartValues" :key="i">
+                <li class="food-list-item">
+                    <div class="title-price">
+                        <h5>{{store.getters.showCartItem(food.foodId)?.name}}</h5>
+                        <h5>{{store.getters.showCartItem(food.foodId)?.price}}</h5>
+                    </div>
+                    <div class="addcart-mojoodnist">
+                        <div class="add-cart" v-if="store.getters.tempCartItem(food.foodId)">
+                            <img @click.stop="deleteFromCart(food.foodId)" class="operation-icon  c-pointer"  src="../assets/img/icons/minus.png" alt="add to cart">
+                        </div>
+                        <div class="foodCount  digit">
+                            {{store.getters.tempCartItem(food.foodId)}}
+                        </div>
+                        <div class="add-cart" >
+                            <img @click.stop="addCart(store.getters.showCartItem(food.foodId))" class="operation-icon c-pointer"  src="../assets/img/icons/plus.png" alt="add to cart">
+                        </div>
+                    </div>
+                </li>
+            </template>
+        
+         </ul>
       </div>
   </div>
 </template>
@@ -57,6 +105,9 @@ import { useStore } from 'vuex';
             height: 46px;
             display: flex;
             align-items: center;
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
         }
         .cart-items-container{
             min-height: 200px;
@@ -71,5 +122,59 @@ import { useStore } from 'vuex';
             margin: auto;
             
         }
+    }
+    .food-list {
+        align-self: flex-start;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        min-height: 100%;
+        font-weight: 300;
+        .food-list-item{
+            width: 100%;
+            display: flex;
+            border: 1px solid rgb(228, 228, 228);
+            justify-content: space-between;
+            align-items: center;
+            border-right: none;
+            border-left: none;
+            padding: 5px;
+            &:nth-child(odd){
+                border-top: none;
+                border-bottom: none;
+            }
+            .title-price {
+                display: flex;
+                flex-direction: column;
+                .title {
+
+                }
+            }
+            .count {
+
+            }
+        }
+    }
+    .addcart-mojoodnist{
+        display: flex;
+        justify-content: space-between;
+        width: 27%;
+
+    }
+        .operation-icon {
+        max-width: 24px;
+        height: 24px;
+        border: 1px solid #888888 ;
+        border-radius: 50%;
+        transition: all .4s;
+        &:hover {
+            background-color:  #888888;
+            transition: all .4s;
+        }
+    }
+    .add-cart {
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 </style>

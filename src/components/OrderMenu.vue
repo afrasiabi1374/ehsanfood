@@ -153,6 +153,9 @@
     overflow: auto hidden;
     border-bottom: 1px solid rgb(228, 228, 228);
   }
+  .categories::-webkit-scrollbar {
+    height: 4px;
+  }
   .search-container {
     padding: 10px 15px;
     border-bottom: 1px dashed rgb(228, 228, 228);
