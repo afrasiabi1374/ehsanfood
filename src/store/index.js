@@ -784,6 +784,12 @@ export const store =   createStore({
       isAvailable.foodCount-=1
       :
       state.tempCart.splice(state.tempCart.findIndex(item=>item.foodId == id), 1)
+    },
+    emptyCart(state){
+      state.activeUser.id ?
+      state.shoppingCart.find(item => item.userId == state.activeUser.id).userFoods = {}
+      :
+      state.tempCart = {}
     }
   },
   actions: {

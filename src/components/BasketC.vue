@@ -60,18 +60,21 @@ import { useStore } from 'vuex';
         
     }
 
+    const emptyCart = () => {
+        store.commit('emptyCart')
+    }
 </script>
 <template>
   <div class="container">
-      <div class="cart-header " > <span class="digit" v-if="cartValues.length"> سبد خرید({{totalCount}})</span> <img class="c-pointer" src="../assets/img/icons/delete.png" alt=""></div>
+      <div class="cart-header " > <span class="digit" v-if="cartValues.length"> سبد خرید({{totalCount}})</span> <img v-if="cartValues.length" @click="emptyCart"  class="c-pointer" src="../assets/img/icons/delete.png" alt=""></div>
       <div class="cart-items-container">
-         <img v-if="!cartValues.length" class="empty-cart c-pointer" src="../assets/img/icons/sabad-kharid.png"  alt="cart-image" draggable="false">
+         <img  v-if="!cartValues.length" class="empty-cart c-pointer" src="../assets/img/icons/sabad-kharid.png"  alt="cart-image" draggable="false">
          <ul v-else class="food-list">
             <template v-for="(food, i) in cartValues" :key="i">
                 <li class="food-list-item">
                     <div class="title-price">
                         <h5>{{store.getters.showCartItem(food.foodId)?.name}}</h5>
-                        <h5>{{store.getters.showCartItem(food.foodId)?.price}}</h5>
+                        <h5>{{store.getters.showCartItem(food.foodId)?.price.toLocaleString('fa-IR')}}</h5>
                     </div>
                     <div class="addcart-mojoodnist">
                         <div class="add-cart" v-if="store.getters.tempCartItem(food.foodId)">
@@ -86,8 +89,13 @@ import { useStore } from 'vuex';
                     </div>
                 </li>
             </template>
-        
+                <div class="total-price">
+                    <h4>قیمت :</h4>
+                    <h4 class="digit">{{momayez}} تومان</h4>
+                </div>
+                <div class="btn flex-center">تکمیل سفارش</div>
          </ul>
+
       </div>
   </div>
 </template>
@@ -98,6 +106,7 @@ import { useStore } from 'vuex';
         width: 27%;
         border :1px solid  rgb(228, 228, 228);
         float: left;
+        padding-bottom: 10px;
         .cart-header {
             padding-right: 15px;
             font-size: 13px;
@@ -107,7 +116,7 @@ import { useStore } from 'vuex';
             align-items: center;
             display: flex;
             justify-content: space-between;
-            padding: 10px;
+            padding: 15px;
         }
         .cart-items-container{
             min-height: 200px;
@@ -138,7 +147,7 @@ import { useStore } from 'vuex';
             align-items: center;
             border-right: none;
             border-left: none;
-            padding: 5px;
+            padding: 10px;
             &:nth-child(odd){
                 border-top: none;
                 border-bottom: none;
@@ -177,4 +186,31 @@ import { useStore } from 'vuex';
         align-items: center;
         justify-content: center;
     }
+    .total-price {
+        color: #022F5E; 
+    }
+    .total-price {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px;
+    }
+
+    .btn {
+      width: 90%;
+      text-align: center;
+      height: 40px;
+      transition: all .3s;
+      border: 1px solid #022F5E;
+      color: #022F5E;
+      border-radius: 10px;
+      margin-top: 20px;
+      font-size: 13px;
+      margin: auto;
+      &:hover {
+        transition: all .3s;
+        background-color: #022F5E;
+        color: white;
+
+      }
+    }    
 </style>
