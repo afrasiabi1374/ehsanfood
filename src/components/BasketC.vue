@@ -13,30 +13,7 @@ import { useStore } from 'vuex';
 
     })
 
-    const momayez = computed(() => {
-        const num = store.getters.getTotal.toString()
-        if (num.length) {
-            const numLen = num.length
-            let arr = []
-            for(let i = 3; i <= numLen ; i+=3){
-                const sliced = num.slice(i-3,i)
-                arr.push(sliced)
-            }
-            let element = ''
-            for (let i = 0; i < arr.length; i++) {
-                element +=arr[i]+ ','
-                
-            }
-            let filtered = ''
-            for (let i = 0; i < element.length-1; i++) {
-                filtered += element[i];
-            }
-            
-            return filtered 
-        }
-
-
-    })
+ 
 
     let totalCount = computed(() => {
         let countAll = cartValues.value.reduce((prev, next) => prev + next.foodCount,0)
@@ -63,6 +40,19 @@ import { useStore } from 'vuex';
     const emptyCart = () => {
         store.commit('emptyCart')
     }
+
+       const momayez = computed(() => {
+        const num = store.getters.getTotal.toString()
+        if (num.length) {
+            var parts = num.toString().split(".");
+            const numberPart = parts[0];
+            const decimalPart = parts[1];
+            const thousands = /\B(?=(\d{3})+(?!\d))/g;
+            return numberPart.replace(thousands, ",") + (decimalPart ? "." + decimalPart : "");
+        }
+
+
+    })
 </script>
 <template>
   <div class="container">

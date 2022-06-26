@@ -668,7 +668,7 @@ export const store =   createStore({
     showCartItem: (state) => (id) => {
       let data = ''
       data = state.ghaza.find( item => item.id == id)
-      console.log(data);
+      // console.log(data);
       return data
     },
     getTotal:(state)=> {
@@ -689,7 +689,7 @@ export const store =   createStore({
           return prevVal +  (nextVal.foodCount*(state.ghaza.find(item => item.id == nextVal.foodId).price))
         },total
       )
-      return computedTotal-(computedTotal*(5/100))
+      return computedTotal
     },
 
   },
