@@ -30,6 +30,7 @@
 
 
   onMounted(()=>{
+    history.scrollRestoration = 'manual';
 
             if (ModalForCard.value == false) {
                 document.body.style.overflow = 'scroll'
@@ -40,6 +41,9 @@
     const proContainer = ref(document.querySelectorAll('.product-container'))
     const catLink = ref(document.querySelectorAll('#cat-link'))
     const stickyCat = () => {
+      if(window.pageYOffset < sticky.value){
+        document?.querySelector('#basket-wrapper')?.classList?.remove('fixed')
+      }
       if (window.pageYOffset >= sticky.value) {
         categoryBox.classList.add("sticky")
         document.querySelector('#basket-wrapper')?.classList?.add('fixed')
@@ -73,7 +77,7 @@
       }else{
         categoryBox?.classList.remove("sticky")
         document?.querySelector('#cat-link')?.classList?.remove("classSpy")
-        document?.querySelector('#basket-wrapper')?.classList?.remove('fixed')
+        
       }
 
 

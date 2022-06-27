@@ -56,10 +56,10 @@ import { useStore } from 'vuex';
 </script>
 <template>
   <div class="basket-container" id="basket-wrapper">
-      <div class="cart-header " > <span class="digit" v-if="cartValues?.length"> سبد خرید({{totalCount}})</span> <img v-if="cartValues.length" @click="emptyCart"  class="c-pointer" src="../assets/img/icons/delete.png" alt=""></div>
+      <div class="cart-header " > <span class="digit" v-if="cartValues !== undefined"> سبد خرید({{totalCount}})</span> <img v-if="cartValues !== undefined" @click="emptyCart"  class="c-pointer" src="../assets/img/icons/delete.png" alt=""></div>
       <div class="cart-items-container" >
-         <img  v-if="!cartValues.length" class="empty-cart c-pointer" src="../assets/img/icons/sabad-kharid.png"  alt="cart-image" draggable="false">
-         <ul  v-if="cartValues.length" class="food-list">
+         <img  v-if="!cartValues[0]" class="empty-cart c-pointer" src="../assets/img/icons/sabad-kharid.png"  alt="cart-image" draggable="false">
+         <ul  v-if="cartValues !== undefined" class="food-list">
             <template v-for="(food, i) in cartValues" :key="i">
                 <li class="food-list-item" v-if="store.getters.showCartItem(food.foodId)?.name">
                     <div class="title-price">
@@ -79,14 +79,15 @@ import { useStore } from 'vuex';
                     </div>
                 </li>
             </template>
-                <div class="total-price">
-                    <h4>قیمت کل :</h4>
-                    <h4 class="digit">{{momayez}} تومان</h4>
-                </div>
-                <div class="btn flex-center">تکمیل سفارش</div>
+
          </ul>
 
       </div>
+      <div class="total-price"  v-if="cartValues[0]">
+            <h4>قیمت کل :</h4>
+            <h4 class="digit">{{momayez}} تومان</h4>
+      </div>
+      <div v-if="cartValues[0]" class="btn flex-center">تکمیل سفارش</div>
   </div>
 </template>
 
@@ -110,10 +111,13 @@ import { useStore } from 'vuex';
             padding: 15px;
         }
         .cart-items-container{
+            max-height: 300px;
             min-height: 200px;
             display: flex;
-            justify-content: center;
+            justify-content: flex-start;
             align-items: center;
+            flex-direction: column;
+            overflow: scroll;
         }
         .empty-cart {
             display: block;
@@ -206,7 +210,7 @@ import { useStore } from 'vuex';
     }    
 .fixed {
   position: fixed!important;
-  top: 1%;
+  top: 0!important;
   left: 2%;
   width: 25.9%;
 }

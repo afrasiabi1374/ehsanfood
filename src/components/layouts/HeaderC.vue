@@ -40,6 +40,7 @@ const closeModal = async (param) => {
   const goOut = () => {
     store.commit('goOut')
     store.commit('emptyCart')
+    
     router.push('/')
   }
 </script>

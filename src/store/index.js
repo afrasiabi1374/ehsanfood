@@ -738,9 +738,8 @@ export const store =   createStore({
     },
     goOut(state){
       const {cookies} = useCookies()
-      // console.log(cookies.remove('userCookie'));
+      cookies.remove('userCookie')
       state.activeUser = {}
-      
     },
     saveInfo(state, persson){
       const targetPersson = state.users.find(user => user.id == persson.id) 
@@ -796,9 +795,9 @@ export const store =   createStore({
     },
     emptyCart(state){
       state.activeUser.id ?
-      state.shoppingCart.find(item => item.userId == state.activeUser.id).userFoods = []
+      state.shoppingCart.find(item => item.userId == state.activeUser.id).userFoods.splice(0)
       :
-      state.tempCart = []
+      state.tempCart.splice(0)
     }
   },
   actions: {
