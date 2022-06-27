@@ -41,7 +41,7 @@ export const store =   createStore({
       {
         id: 1,
         fullName: 'mohammad ali',
-        phoneNumber: '09198017872',
+        phoneNumber: "09198017872",
         birthDate: '1374/11/17',
         gender: 'مرد',
         email:'mohammad.aligiga@gmailcom',
@@ -660,38 +660,46 @@ export const store =   createStore({
       return state.tempCart
     },
     tempCartItem: (state) => (id) => {
-      return state.tempCart.find(item=> item.foodId == id)?.foodCount
+      const userCart = state.shoppingCart.find(userCart => userCart?.userId == state.activeUser?.id)?.userFoods
+      let data = undefined 
+      state.activeUser.id ? 
+      data = userCart.find(item => item.foodId == id)?.foodCount
+      :
+      data = state.tempCart.find(item=> item.foodId == id)?.foodCount
+      return data
     },
     userCart: (state) => {
-      state.shoppingCart.find(userCart => userCart.id == state.activeUser.id)
+      console.log('user cart',state.shoppingCart.find(userCart => userCart.userId == state.activeUser.id).userFoods)
+      return state.shoppingCart.find(userCart => userCart.userId == state.activeUser.id).userFoods
     },
     showCartItem: (state) => (id) => {
+
       let data = ''
       data = state.ghaza.find( item => item.id == id)
       // console.log(data);
       return data
     },
     getTotal:(state)=> {
-      const userCart = state.shoppingCart.find(userCart => userCart?.userId == state.activeUser.id)
+      const userCart = state.shoppingCart.find(userCart => userCart?.userId == state.activeUser?.id)?.userFoods
       const tempCart = state.tempCart
       let total = 0
       let computedTotal = undefined
-      state.activeUser.id  ?
+      state.activeUser.id ?
       computedTotal = userCart.reduce(
         (prevVal, nextVal) => {
-          return prevVal +  (nextVal.foodCount*state.foods.find(item=>item.id == nextVal.foodId).price)
-        }
+          return prevVal + nextVal.foodCount*(state.ghaza.find(item => item.id == nextVal.foodId).price)
+        }, total
       )
       :
       computedTotal = tempCart.reduce(
         (prevVal, nextVal) => {
-          // console.log('next count =>',nextVal.foodCount, 'next foodId =>',nextVal.foodId);
           return prevVal +  (nextVal.foodCount*(state.ghaza.find(item => item.id == nextVal.foodId).price))
         },total
-      )
-      return computedTotal
+        )
+        console.log('total ===>',computedTotal)
+        return computedTotal
     },
-
+    
   },
   mutations: {
     saveUser(state, personInfo){
@@ -743,26 +751,27 @@ export const store =   createStore({
       targetPersson.gender = persson.gender
     },
     addCart(state, food) {
-      if (state.shoppingCart.find(targetCart => targetCart.userId == state.activeUser.id) == undefined) {
-        state.shoppingCart.push({ userId: state.activeUser.id, userFoods: []})
+      if ( state.shoppingCart.find(targetCart => targetCart.userId == state.activeUser.id) == undefined) {
+        state.shoppingCart.push({ userId:  state.activeUser.id, userFoods: []})
       }
       let targetCart =  state.shoppingCart.find(targetCart => targetCart.userId == state.activeUser.id)
-      const isAvalable =  targetCart.userFoods.find(targetFood => targetFood.foodId == food.id)?.foodId
+      const isAvalable =   targetCart.userFoods.find(targetFood => targetFood.foodId == food.id)?.foodId
+      console.log(isAvalable)
       isAvalable ?
       targetCart.userFoods.find(targetFood => targetFood.foodId == food.id).foodCount+=1
       :
       targetCart.userFoods.push({foodCount: 1, foodId: food.id})
-      // console.log(targetCart);
+      console.log(targetCart);
     },
-    deleteFromCart(state, food){
+    deleteFromCart(state, id) {
       const targetCart = state.shoppingCart.find(targetCart => targetCart.userId == state.activeUser.id)
-      const moreThanOne = targetCart.userFoods.find(targetFood => targetFood.foodId == food.id)?.foodCount > 1
-      
+      const moreThanOne = targetCart.userFoods.find(targetFood => targetFood.foodId == id)?.foodCount > 1
+      // console.log(moreThanOne, id);
       moreThanOne ?
-      targetCart.userFoods.find(targetFood => targetFood.foodId == food.id).foodCount-=1
+      targetCart.userFoods.find(targetFood => targetFood.foodId == id).foodCount-=1
       :
-      targetCart.userFoods.splice(targetCart.userFoods.findIndex(item => item.foodId == food.id),1)
-      // console.log(targetCart);
+      targetCart.userFoods.splice(targetCart.userFoods.findIndex(item => item.foodId == id),1)
+      console.log(targetCart);
     },
     addToTempCart(state, food){
       const isAvailable = state.tempCart.find(item => item.foodId == food.id)
@@ -787,9 +796,9 @@ export const store =   createStore({
     },
     emptyCart(state){
       state.activeUser.id ?
-      state.shoppingCart.find(item => item.userId == state.activeUser.id).userFoods = {}
+      state.shoppingCart.find(item => item.userId == state.activeUser.id).userFoods = []
       :
-      state.tempCart = {}
+      state.tempCart = []
     }
   },
   actions: {

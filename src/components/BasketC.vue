@@ -3,9 +3,9 @@ import { computed } from '@vue/reactivity';
 import { useStore } from 'vuex';
 
     const store = useStore()
-    const activeUser = store.getters.activeUser
+    const activeUser = store.getters.targetUser
     const cartValues  =  computed(()=>{
-        if (activeUser?.id) {
+        if (activeUser.id) {
             return store.getters.userCart
         } else {
             return store.getters.tempCartShow
@@ -55,7 +55,7 @@ import { useStore } from 'vuex';
     })
 </script>
 <template>
-  <div class="container">
+  <div class="basket-container" id="basket-wrapper">
       <div class="cart-header " > <span class="digit" v-if="cartValues.length"> سبد خرید({{totalCount}})</span> <img v-if="cartValues.length" @click="emptyCart"  class="c-pointer" src="../assets/img/icons/delete.png" alt=""></div>
       <div class="cart-items-container">
          <img  v-if="!cartValues.length" class="empty-cart c-pointer" src="../assets/img/icons/sabad-kharid.png"  alt="cart-image" draggable="false">
@@ -80,7 +80,7 @@ import { useStore } from 'vuex';
                 </li>
             </template>
                 <div class="total-price">
-                    <h4>قیمت :</h4>
+                    <h4>قیمت کل :</h4>
                     <h4 class="digit">{{momayez}} تومان</h4>
                 </div>
                 <div class="btn flex-center">تکمیل سفارش</div>
@@ -92,11 +92,12 @@ import { useStore } from 'vuex';
 
 
 <style lang="scss" scoped>
-    .container {
+    .basket-container {
         width: 27%;
         border :1px solid  rgb(228, 228, 228);
         float: left;
         padding-bottom: 10px;
+        
         .cart-header {
             padding-right: 15px;
             font-size: 13px;
@@ -203,4 +204,10 @@ import { useStore } from 'vuex';
 
       }
     }    
+.fixed {
+  position: fixed!important;
+  top: 1%;
+  left: 2%;
+  width: 25.9%;
+}
 </style>

@@ -40,8 +40,9 @@
     const proContainer = ref(document.querySelectorAll('.product-container'))
     const catLink = ref(document.querySelectorAll('#cat-link'))
     const stickyCat = () => {
-      if (window.pageYOffset > sticky.value) {
+      if (window.pageYOffset >= sticky.value) {
         categoryBox.classList.add("sticky")
+        document.querySelector('#basket-wrapper')?.classList?.add('fixed')
           // console.log(catTitle.value);
           catTitle.value.forEach((item, catTitleIndex) => {
             if ((proContainer.value[catTitleIndex].getBoundingClientRect().top-70 <= categoryBox.getBoundingClientRect().bottom) && proContainer.value[catTitleIndex].getBoundingClientRect().bottom - categoryBox.getBoundingClientRect().bottom >= 0) {
@@ -70,8 +71,9 @@
 
         
       }else{
-        categoryBox.classList.remove("sticky")
+        categoryBox?.classList.remove("sticky")
         document?.querySelector('#cat-link')?.classList?.remove("classSpy")
+        document?.querySelector('#basket-wrapper')?.classList?.remove('fixed')
       }
 
 
@@ -88,9 +90,7 @@
     window.removeEventListener('scroll', ()=>{
       stickyCat()
     })
-    if (modal) {
-      
-    }
+
   })
 </script>
 <template>
