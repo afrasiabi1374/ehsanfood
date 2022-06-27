@@ -39,6 +39,7 @@ const closeModal = async (param) => {
   const activeUser = computed(()=>store.getters.targetUser)
   const goOut = () => {
     store.commit('goOut')
+    store.commit('emptyCart')
     router.push('/')
   }
 </script>
@@ -57,8 +58,8 @@ const closeModal = async (param) => {
           <img src="../../assets/img/icons/account.svg"  class="ml-1" alt="account" >
           خروج
         </div>
-        <div class="lang btn">
-          En
+        <div class="lang btn" v-if="store.getters.targetUser.id">
+          <router-link  to="/profile/informations">پروفایل</router-link>
         </div>
       </div>
     </div>

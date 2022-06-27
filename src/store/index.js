@@ -669,8 +669,8 @@ export const store =   createStore({
       return data
     },
     userCart: (state) => {
-      console.log('user cart',state.shoppingCart.find(userCart => userCart.userId == state.activeUser.id).userFoods)
-      return state.shoppingCart.find(userCart => userCart.userId == state.activeUser.id).userFoods
+      console.log('user cart',state.shoppingCart.find(userCart => userCart.userId == state.activeUser.id)?.userFoods)
+      return state.shoppingCart.find(userCart => userCart.userId == state.activeUser.id)?.userFoods
     },
     showCartItem: (state) => (id) => {
 

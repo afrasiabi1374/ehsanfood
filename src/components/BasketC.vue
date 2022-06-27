@@ -16,8 +16,8 @@ import { useStore } from 'vuex';
  
 
     let totalCount = computed(() => {
-        let countAll = cartValues.value.reduce((prev, next) => prev + next.foodCount,0)
-        return countAll
+        let countAll = cartValues.value?.reduce((prev, next) => prev + next.foodCount,0)
+        return countAll || ''
     })
 
     const addCart = (food) => {
@@ -56,12 +56,12 @@ import { useStore } from 'vuex';
 </script>
 <template>
   <div class="basket-container" id="basket-wrapper">
-      <div class="cart-header " > <span class="digit" v-if="cartValues.length"> سبد خرید({{totalCount}})</span> <img v-if="cartValues.length" @click="emptyCart"  class="c-pointer" src="../assets/img/icons/delete.png" alt=""></div>
-      <div class="cart-items-container">
+      <div class="cart-header " > <span class="digit" v-if="cartValues?.length"> سبد خرید({{totalCount}})</span> <img v-if="cartValues.length" @click="emptyCart"  class="c-pointer" src="../assets/img/icons/delete.png" alt=""></div>
+      <div class="cart-items-container" >
          <img  v-if="!cartValues.length" class="empty-cart c-pointer" src="../assets/img/icons/sabad-kharid.png"  alt="cart-image" draggable="false">
-         <ul v-else class="food-list">
+         <ul  v-if="cartValues.length" class="food-list">
             <template v-for="(food, i) in cartValues" :key="i">
-                <li class="food-list-item">
+                <li class="food-list-item" v-if="store.getters.showCartItem(food.foodId)?.name">
                     <div class="title-price">
                         <h5>{{store.getters.showCartItem(food.foodId)?.name}}</h5>
                         <h5>{{store.getters.showCartItem(food.foodId)?.price.toLocaleString('fa-IR')}}</h5>
