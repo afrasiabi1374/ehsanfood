@@ -5,9 +5,9 @@ import { useStore } from 'vuex';
     const store = useStore()
     const activeUser = store.getters.targetUser
     const cartValues  =  computed(()=>{
-        if (activeUser.id) {
+        if (activeUser.id && store.getters.userCart != undefined) {
             return store.getters.userCart
-        } else {
+        } else  {
             return store.getters.tempCartShow
         }
 
@@ -29,7 +29,7 @@ import { useStore } from 'vuex';
         
     }
     const deleteFromCart = (id) => {
-        if (store.getters.targetUser?.id) {
+        if (store.getters.targetUser?.id ) {
             store.commit('deleteFromCart', id)
         }else{
             store.commit('deleteFromTempCart', id)
@@ -56,10 +56,10 @@ import { useStore } from 'vuex';
 </script>
 <template>
   <div class="basket-container" id="basket-wrapper">
-      <div class="cart-header " > <span class="digit" v-if="cartValues !== undefined"> سبد خرید({{totalCount}})</span> <img v-if="cartValues !== undefined" @click="emptyCart"  class="c-pointer" src="../assets/img/icons/delete.png" alt=""></div>
+      <div class="cart-header " > <span class="digit" > سبد خرید({{totalCount}})</span> <img  @click="emptyCart"  class="c-pointer" src="../assets/img/icons/delete.png" alt=""></div>
       <div class="cart-items-container" >
-         <img  v-if="!cartValues[0]" class="empty-cart c-pointer" src="../assets/img/icons/sabad-kharid.png"  alt="cart-image" draggable="false">
-         <ul  v-if="cartValues !== undefined" class="food-list">
+         <img v-if="!totalCount" class="empty-cart c-pointer" src="../assets/img/icons/sabad-kharid.png"  alt="cart-image" draggable="false">
+         <ul   class="food-list">
             <template v-for="(food, i) in cartValues" :key="i">
                 <li class="food-list-item" v-if="store.getters.showCartItem(food.foodId)?.name">
                     <div class="title-price">
@@ -83,11 +83,11 @@ import { useStore } from 'vuex';
          </ul>
 
       </div>
-      <div class="total-price"  v-if="cartValues[0]">
+      <div class="total-price">
             <h4>قیمت کل :</h4>
             <h4 class="digit">{{momayez}} تومان</h4>
       </div>
-      <div v-if="cartValues[0]" class="btn flex-center">تکمیل سفارش</div>
+      <div class="btn flex-center">تکمیل سفارش</div>
   </div>
 </template>
 

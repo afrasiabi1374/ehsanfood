@@ -37,10 +37,9 @@ const closeModal = async (param) => {
   }
   const store = useStore()
   const activeUser = computed(()=>store.getters.targetUser)
-  const goOut = () => {
-    store.commit('goOut')
+  const goOut =  () => {
     store.commit('emptyCart')
-    
+    store.commit('goOut')
     router.push('/')
   }
 </script>

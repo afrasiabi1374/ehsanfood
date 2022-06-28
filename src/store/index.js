@@ -696,7 +696,7 @@ export const store =   createStore({
           return prevVal +  (nextVal.foodCount*(state.ghaza.find(item => item.id == nextVal.foodId).price))
         },total
         )
-        console.log('total ===>',computedTotal)
+        // console.log('total ===>',computedTotal)
         return computedTotal
     },
     
@@ -760,7 +760,7 @@ export const store =   createStore({
       targetCart.userFoods.find(targetFood => targetFood.foodId == food.id).foodCount+=1
       :
       targetCart.userFoods.push({foodCount: 1, foodId: food.id})
-      console.log(targetCart);
+      // console.log(targetCart);
     },
     deleteFromCart(state, id) {
       const targetCart = state.shoppingCart.find(targetCart => targetCart.userId == state.activeUser.id)
