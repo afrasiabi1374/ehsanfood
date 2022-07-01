@@ -4,7 +4,7 @@
     const current = ref(1);
 </script>
 <template>
-  <div class="container">
+  <div class="tab-container">
     <ul class="navigation text-select-disabled">
         <li :class="['nav-item', current === 1 ? 'active-tab' : 'not-active-tab']" @click="current = 1">منو سفارش</li>
         <li :class="['nav-item', current === 2 ? 'active-tab' : 'not-active-tab']" @click="current = 2">اطلاعات رستوران</li>
@@ -16,10 +16,14 @@
 </template>
 
 <style lang="scss" scoped>
-    .container {
+    .tab-container {
+        @media screen and (max-width: 990px) {
+           width: 100%;
+        }
         position: relative;
         margin-top: 25px;
-        width: 100%;
+        width: 70%;
+        padding-bottom: 170px;
     }
     .navigation {
         list-style-type: none;
@@ -38,10 +42,11 @@
     }
     .tab-content {
         border :1px solid  rgb(228, 228, 228);
-        width: 70%;
-        position: absolute;
-        top: 45px;
+        width: 100%;
+        position: relative;
+        display: inline-block;
         min-height: 100vh;
+        padding: 20px 0;
     }
     .active-tab {
         background-color: #fffefe;

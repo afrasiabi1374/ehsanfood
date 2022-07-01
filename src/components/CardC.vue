@@ -63,6 +63,12 @@ import { useStore } from 'vuex';
 
 <style scoped lang="scss">
     .card-container {
+        @media screen and (max-width: 1200px) {
+            width: 49%;
+        }
+        @media screen and (max-width: 650px) {
+            width: 98%;
+        }
         position: relative;
         width: 32.6%;
         border: 1px solid rgb(228, 228, 228);

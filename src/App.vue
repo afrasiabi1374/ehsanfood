@@ -1,15 +1,19 @@
 <script setup>
   import HeaderC from './components/layouts/HeaderC.vue';
+import FooterC from './components/layouts/FooterC.vue';
 </script>
 
 <template>
-  <HeaderC/>
-      <router-view></router-view>
+  <div class="main-container">
+    <HeaderC/>
+    <router-view></router-view>
+    <FooterC/>
+  </div>
 </template>
 
 <style lang="scss" scoped>
-  .tab-basket-container {
-    margin: auto;
-    margin-top: 10px;
+  .main-container {
+    display: flex;
+    flex-direction: column;
   }
 </style>

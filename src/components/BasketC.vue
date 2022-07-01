@@ -1,6 +1,7 @@
 <script setup>
-import { computed } from '@vue/reactivity';
+import { computed, ref } from 'vue';
 import { useStore } from 'vuex';
+import ModalC from './ModalC.vue';
 
     const store = useStore()
     const activeUser = store.getters.targetUser
@@ -53,11 +54,27 @@ import { useStore } from 'vuex';
 
 
     })
+
+    let activeMobileBasket = ref(false)
+    const openCloseBasket = ()=>{
+        activeMobileBasket.value = !activeMobileBasket.value
+        console.log(activeMobileBasket.value);
+        if (activeMobileBasket.value == false) {
+            document.body.style.overflow = 'scroll'
+        }
+    }
 </script>
 <template>
-  <div class="basket-container" id="basket-wrapper">
-      <div class="cart-header " > <span class="digit" > سبد خرید({{totalCount}})</span> <img  @click="emptyCart"  class="c-pointer" src="../assets/img/icons/delete.png" alt=""></div>
+  <div :class="['basket-container',activeMobileBasket ? 'open-mobile-basket' : '']" id="basket-wrapper">
+      <div class="cart-header " > <span class="digit" >
+         سبد خرید({{totalCount||0}})</span>
+         <span>
+            <img  @click="emptyCart"  class="c-pointer" src="../assets/img/icons/delete.png" alt="">
+            <img @click="openCloseBasket"  src="../assets/img/icons/close-box.png" :class="['close-mobile-basket-icon c-pointer']" alt="">
+         </span>
+      </div>
       <div class="cart-items-container" >
+        
          <img v-if="!totalCount" class="empty-cart c-pointer" src="../assets/img/icons/sabad-kharid.png"  alt="cart-image" draggable="false">
          <ul   class="food-list">
             <template v-for="(food, i) in cartValues" :key="i">
@@ -89,16 +106,42 @@ import { useStore } from 'vuex';
       </div>
       <div class="btn flex-center">تکمیل سفارش</div>
   </div>
+  <div @click="openCloseBasket" class="open-baket-btn‌">سبد خرید</div>
+  <ModalC v-model="activeMobileBasket"/>
 </template>
 
 
 <style lang="scss" scoped>
+
     .basket-container {
+
+        .close-mobile-basket-icon {
+            display: none;
+        }
+        @media screen and (max-width: 990px) {
+           height: 100vh;
+           position: fixed;
+           z-index: 20000;
+           background-color: aliceblue;
+           width: 400px;
+           top: 0;
+           left: 0;
+           transform: translateX(-450px);
+           transition: all .4s;
+            .close-mobile-basket-icon {
+                display: inline-block;
+            }
+        }
+
+
         width: 27%;
         border :1px solid  rgb(228, 228, 228);
         float: left;
         padding-bottom: 10px;
-        
+        position: absolute;
+        top: 500px;
+          left: 2%;
+
         .cart-header {
             padding-right: 15px;
             font-size: 13px;
@@ -208,10 +251,34 @@ import { useStore } from 'vuex';
 
       }
     }    
-.fixed {
-  position: fixed!important;
-  top: 0!important;
-  left: 2%;
-  width: 25.9%;
+
+.open-baket-btn‌ {
+    position: fixed;
+    bottom: 0;
+    width: 100vw!important;
+    height: 50px;
+    background-color: #022F5E;
+    color: white;
+    text-align: center;
+    cursor: pointer;
+    display: none;
+    @media screen and (max-width: 990px) {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    left: 5px;
 }
+.open-mobile-basket {
+    transform: translateX(0px)!important;
+    transition: all .4s;
+}
+        @media screen and (min-width: 990px) {
+            .fixed {
+                position: fixed!important;
+                top: 10px!important;
+                left: 2%;
+            }
+
+        }
 </style>

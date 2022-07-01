@@ -98,7 +98,7 @@
   })
 </script>
 <template>
-  <div  class="container w-full ">
+  <div  class="order-container w-full ">
     <div id="categy-Box" class="categories">
       <template v-for="(category, i) in cats" :key="i">
         <a :href="'#'+category.categoryId" id="cat-link" class="category flex-column-center c-pointer">
@@ -133,8 +133,9 @@
 
 
 <style lang="scss" scoped>
-  .container {
+  .order-container {
     margin-top: 20px;
+    width: 100%;
   }
 
   .img-cat {
@@ -148,7 +149,6 @@
     font-size: 13px;
     text-decoration: none;
     font-weight: bolder;
-    
   }
   .categories {
     display: flex;
@@ -173,7 +173,7 @@
     margin:auto;
     display: flex;
     flex-wrap: wrap;
-    gap: 1.1%;
+    justify-content: space-between;
   }
 
   .header {
@@ -210,7 +210,7 @@
 }
 .smaller-enter-active {
   transform: scale(1);
-    opacity: 1;
+  opacity: 1;
   transition: all .3s ease-out;
 
 }
