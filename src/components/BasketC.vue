@@ -132,7 +132,7 @@ import ModalC from './ModalC.vue';
                 display: inline-block;
             }
         }
-        @media screen and (max-width: 360px) {
+        @media screen and (max-width: 560px) {
            height: 100vh;
            position: fixed;
            z-index: 20000;
