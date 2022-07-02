@@ -3,7 +3,8 @@
     const props = defineProps({
         inputLabel: String,
         inputType: String,
-        modelValue: String
+        modelValue: String,
+        searchIcon: Boolean
     })
       const emit = defineEmits(['update:modelValue'])
 
@@ -36,9 +37,9 @@
 </script>
 <template>
     <div v-bind="$attrs" class="input-box" @click.prevent="clickIn">
-        <img src="../assets/img/icons/magnify.png" alt="magnify" class="search-icon">
+        <img v-if="props.searchIcon" src="../assets/img/icons/magnify.png" alt="magnify" class="search-icon">
         <label @click.stop="clickIn"  :class="['place-holder','c-pointer', props.modelValue || active ? 'active' : '']" for="search" :id="[randID]"> {{ inputLabel }} </label>
-        <input  :value="modelValue"  :type="props.inputType" @input="sendValue($event)" @click.stop="clickIn"  @blur.stop="clickOut"  class="search-input digit" type="text" :id="['input-'+randID]">
+        <input  :value="modelValue"  :type="props.inputType" @input="sendValue($event)" @click.stop="clickIn"  @blur.stop="clickOut"  class="search-input digit" :id="['input-'+randID]">
     </div>
 </template>
 <style lang="scss" scoped>

@@ -110,7 +110,7 @@
     </div>
     <div class=" search-container">
       <div class="search-box-container">
-        <InputC  v-model="valueForSearch" inputLabel="جستجو" />
+        <InputC :searchIcon="true" v-model="valueForSearch" inputLabel="جستجو" />
       </div>
     </div>
     <div>
