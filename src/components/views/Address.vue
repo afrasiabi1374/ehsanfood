@@ -80,6 +80,10 @@
         padding-top: 20px;
         padding-bottom: 20px;
         border-radius: 20px;
+        padding: 20px;
+        @media screen and (max-width: 900px) {
+            width: 90%;
+        }
     }
     .send-address-btn {
       width: 110px;

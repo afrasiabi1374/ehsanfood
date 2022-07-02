@@ -74,6 +74,7 @@ const addUser = async () => {
         background-color: white;
         padding: 18px;
         border-radius: 12px;
+
     }
     .send-sms-title {
       margin-top: 5px;

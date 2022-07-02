@@ -29,6 +29,9 @@ import { useStore } from 'vuex';
         flex-wrap: wrap;
         margin-top: 20px;
         gap: 15px;
+                @media screen and (max-width: 600px) {
+            width: 100%;
+        }
     }
     .send-sms-btn {
       width: 110px;
@@ -41,6 +44,9 @@ import { useStore } from 'vuex';
       margin-top: 20px;
       font-size: 13px;
       margin: auto;
+        @media screen and (max-width: 990px) {
+            width: 100%;
+        }
       &:hover {
         transition: all .3s;
         background-color: #022F5E;
@@ -50,5 +56,8 @@ import { useStore } from 'vuex';
     }
     .input‌ { 
         margin-top: 20px;
+        @media screen and (max-width: 990px) {
+            width: 100%;
+        }
     }
 </style>

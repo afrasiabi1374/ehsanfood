@@ -49,6 +49,7 @@
         border: 1px solid black;
         padding: 4px;
         border-radius: 10px;
+
         .place-holder{
             font-size: 12px;
             position: absolute;

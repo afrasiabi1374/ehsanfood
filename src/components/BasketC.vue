@@ -132,6 +132,20 @@ import ModalC from './ModalC.vue';
                 display: inline-block;
             }
         }
+        @media screen and (max-width: 360px) {
+           height: 100vh;
+           position: fixed;
+           z-index: 20000;
+           background-color: aliceblue;
+           width: 100%;
+           top: 0;
+           left: 0;
+           transform: translateX(-130%);
+           transition: all .4s;
+            .close-mobile-basket-icon {
+                display: inline-block;
+            }
+        }
 
 
         width: 27%;

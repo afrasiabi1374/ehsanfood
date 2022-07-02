@@ -34,7 +34,8 @@
         </div>
         <div class="date-gender">
 
-        </div>{{userInfo}}
+        </div>
+        <!-- {{userInfo}} -->
         <button @click.prevent="saveInfo(info)" class="send-sms-btn flex-center c-pointer">ذخیره اطلاعات</button>
     </form>
 </template>
@@ -46,11 +47,17 @@
         flex-wrap: wrap;
         margin-top: 15px;
         gap: 5px;
+        @media screen and (max-width: 600px) {
+            width: 100%;
+        }
     }
     .info-input {
 
         margin-top: 25px;
         width: 40%;
+        @media screen and (max-width: 600px) {
+            width: 100%;
+        }
         
     }
 
