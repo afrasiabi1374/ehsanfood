@@ -71,6 +71,12 @@ import { useStore } from 'vuex';
         position: absolute;
         width: 32.6%;
         background-color: white;
+        @media screen and (max-width: 1000px) {
+            width: 50%;
+        }
+        @media screen and (max-width: 600px) {
+            width: 70%;
+        }
 
         & .off-percent {
             position: absolute;
